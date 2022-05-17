@@ -21,11 +21,25 @@ void Text_Cleanup(void)
 void Text_CreateText(Text* text, const char* fontFile, int32 fontSize, const wchar_t* str, int32 length)
 {
 	Text_SetFont(text, fontFile, fontSize);
-
+	
 	text->String = malloc(sizeof(wchar_t) * (length + 1));
 	for (int32 i = 0; i < length; ++i)
 	{
 		(text->String)[i] = str[i];
+	}
+	(text->String)[length] = L'\0';
+	
+	text->Length = length;
+}
+
+void Text_CreateText2(Text* text, const char* fontFile, int32 fontSize, const wchar_t* str, int32 length, int32 index)
+{
+	Text_SetFont(text, fontFile, fontSize);
+
+	text->String = malloc(sizeof(wchar_t) * (length + 1));
+	for (index = 0; index < length; ++index)
+	{
+		(text->String)[index] = str[index];
 	}
 	(text->String)[length] = L'\0';
 
@@ -62,4 +76,15 @@ void Text_SetFontStyle(Text* text, EFontStyle style)
 EFontStyle Text_GetFontStyle(const Text* text)
 {
 	return (EFontStyle)TTF_GetFontStyle(text->Font);
+}
+
+void TextCopy(Text* dest, const WCHAR* src)
+{
+	while (*src)
+	{
+		*dest->String = *src;
+
+		++dest->String;
+		++src;
+	}
 }

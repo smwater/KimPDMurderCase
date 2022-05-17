@@ -93,7 +93,7 @@ int32 App_Run(void)
 	SDL_Event event;
 	while (true)
 	{
-		if (SDL_PollEvent(&event))
+		if (SDL_PollEvent(&event)) // sdl 실행창 띄우는 명령어, SDL_QUIT값을 반환하면 실행종료
 		{
 			if (event.type == SDL_QUIT)
 			{
@@ -104,14 +104,14 @@ int32 App_Run(void)
 		{
 			if (Scene_IsSetNextScene())
 			{
-				Scene_Change();
+				Scene_Change(); // s_nextScene값을 받아서 switch문에 따라서 각 신데이터를 초기화 시킨다.
 			}
 
 			if (Timer_Update())
 			{
-				processInput();
-				update();
-				render();
+				processInput(); // 플레이어로부터의 입력을 업데이트 시킨다.
+				update(); // 신데이터들을 실시간으로 업데이트 시킨다.
+				render(); // 신데이터들을 실시간으로 랜더링 시킨다.
 			}
 		}
 	}

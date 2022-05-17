@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "568f610e-cd77-4bf6-a41f-38c6275aa184": {
+      "ProjectGuid": "568f610e-cd77-4bf6-a41f-38c6275aa184",
+      "DisplayName": "SDL Game Framework",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

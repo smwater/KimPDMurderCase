@@ -1,36 +1,29 @@
-﻿  Scene.c
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(135,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(201,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(206,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(211,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(216,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SDL Game Framework.vcxproj -> C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmodplug-1.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmpg123-0.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libogg-0.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopus-0.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopusfile-0.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libpng16-16.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libtiff-5.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbis-0.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbisfile-3.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libwebp-7.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_image.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_mixer.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_ttf.dll
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\zlib1.dll
-         17개 파일이 복사되었습니다.
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\d2coding.ttf
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicBold.ttf
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background.jfif
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background2.jfif
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\CursorImage.png
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\GameStartImage.png
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\TitleImage.png
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect.wav
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect2.wav
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\powerful.mp3
-  10개 파일이 복사되었습니다.
+﻿  Renderer.c
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(35,21): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(36,22): warning C4244: 'initializing': conversion from 'const float' to 'int', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(43,59): warning C4133: 'function': incompatible types - from 'TTF_Font *const ' to 'TTF_Font *'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(54,59): warning C4133: 'function': incompatible types - from 'const char *' to 'const Uint16 *'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(65,60): warning C4133: 'function': incompatible types - from 'TTF_Font *const ' to 'TTF_Font *'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(77,61): warning C4133: 'function': incompatible types - from 'TTF_Font *const ' to 'TTF_Font *'
+  Scene.c
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(38,16): error C2040: 'str': 'const wchar_t *[0]' differs in levels of indirection from 'wchar_t [100]'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(68,66): warning C4047: 'function': 'const wchar_t *' differs in levels of indirection from 'wchar_t'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(68,63): warning C4024: 'Text_CreateText': different types for formal and actual parameter 4
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(68,81): warning C4047: 'function': 'const wchar_t *' differs in levels of indirection from 'wchar_t'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(68,78): warning C4024: 'wcslen': different types for formal and actual parameter 1
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(68,74): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(251,75): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(257,44): warning C4047: 'function': 'Text *' differs in levels of indirection from 'Text (*)[128]'
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(257,19): warning C4024: 'Text_CreateText': different types for formal and actual parameter 1
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(257,84): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(326,26): warning C4244: '+=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(331,26): warning C4244: '-=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(336,26): warning C4244: '-=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(341,26): warning C4244: '+=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(433,17): warning C4244: '=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(443,17): warning C4244: '=': conversion from 'float' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(470,24): warning C4244: '-=': conversion from 'double' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(479,24): warning C4244: '+=': conversion from 'double' to 'int32', possible loss of data
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(517,26): warning C4013: 'Renderer_DrawTextSolid2' undefined; assuming extern returning int
+D:\SDL-Game-Framework\SDL Game Framework\SDL Game Framework\Framework\Scene.c(513,3): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
