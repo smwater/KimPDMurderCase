@@ -2,7 +2,6 @@
 #include "Scene.h"
 
 #include "Framework.h"
-#include "Cursor.h"
 
 Scene g_Scene;
 
@@ -16,7 +15,6 @@ typedef struct TitleSceneData
 	Image	GameStartImage;
 	Image	CursorImage;
 	COORD	CursorPos;
-	Cursor	cursor;
 } TitleSceneData;
 
 void init_title(void)
