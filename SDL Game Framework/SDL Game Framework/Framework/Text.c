@@ -21,14 +21,14 @@ void Text_Cleanup(void)
 void Text_CreateText(Text* text, const char* fontFile, int32 fontSize, const wchar_t* str, int32 length)
 {
 	Text_SetFont(text, fontFile, fontSize);
-	
+
 	text->String = malloc(sizeof(wchar_t) * (length + 1));
 	for (int32 i = 0; i < length; ++i)
 	{
 		(text->String)[i] = str[i];
 	}
 	(text->String)[length] = L'\0';
-	
+
 	text->Length = length;
 }
 
