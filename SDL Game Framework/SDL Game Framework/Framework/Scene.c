@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 #include "Framework.h"
+#include "Cursor.h"
 
 Scene g_Scene;
 
@@ -9,30 +10,13 @@ static ESceneType s_nextScene = SCENE_NULL;
 
 #pragma region TitleScene
 
-#define SOLID 0
-#define SHADED 1
-#define BLENDED 2
-
-const wchar_t* str[] = {
-	L"여기는 타이틀씬입니다. 텍스트와 관련된 여러가지를 테스트해봅시다.",
-	L"B키를 누르면 폰트가 굵게 변합니다.",
-	L"I키를 누르면 폰트가 이탤릭체로 변합니다.",
-	L"U키를 누르면 텍스트에 밑줄이 생깁니다.",
-	L"S키를 누르면 텍스트에 취소선이 생깁니다.",
-	L"N키를 누르면 다시 원래대로 돌아옵니다.",
-	L"C키를 누르면 렌더 모드가 바뀝니다. (Solid -> Shaded -> Blended)",
-	L"1키를 누르면 텍스트가 작아집니다.",
-	L"2키를 누르면 텍스트가 커집니다.",
-	L"스페이스 키를 누르면 다음 씬으로 넘어갑니다."
-};
-
 typedef struct TitleSceneData
 {
-	Text	GuideLine[10];
-	Text	TestText;
-	int32	FontSize;
-	int32	RenderMode;
-	Image	TestImage;
+	Image	TitleBackGroundImage;
+	Image	GameStartImage;
+	Image	CursorImage;
+	COORD	CursorPos;
+	Cursor	cursor;
 } TitleSceneData;
 
 void init_title(void)
@@ -41,66 +25,33 @@ void init_title(void)
 	memset(g_Scene.Data, 0, sizeof(TitleSceneData));
 
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
-	for (int32 i = 0; i < 10; ++i)
-	{
-		Text_CreateText(&data->GuideLine[i], "d2coding.ttf", 16, str[i], wcslen(str[i]));
-	}
 
-	data->FontSize = 24;
-	Text_CreateText(&data->TestText, "d2coding.ttf", data->FontSize, L"이 텍스트가 변합니다.", 13);
+	Image_LoadImage(&data->TitleBackGroundImage, "TitleImage.png");
 
-	data->RenderMode = SOLID;
+	Image_LoadImage(&data->GameStartImage, "GameStartImage.png");
 
-	Image_LoadImage(&data->TestImage, "Background.jfif");
+	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 }
+
+#define GameStartPosX 528
+#define GameStartPosY 533
 
 void update_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
-	if (Input_GetKeyDown('B'))
+	if ((Input_GetKeyDown(VK_LEFT) || Input_GetKeyDown(VK_RIGHT)) && data->CursorPos.X == 0 && data->CursorPos.Y == 0)
 	{
-		Text_SetFontStyle(&data->TestText, FS_BOLD);
+		data->CursorPos.X = GameStartPosX;
+		data->CursorPos.Y = GameStartPosY;
+	}
+	else if ((Input_GetKeyDown(VK_LEFT) || Input_GetKeyDown(VK_RIGHT)) && data->CursorPos.X != 0 && data->CursorPos.Y != 0)
+	{
+		data->CursorPos.X = 0;
+		data->CursorPos.Y = 0;
 	}
 
-	if (Input_GetKeyDown('I'))
-	{
-		Text_SetFontStyle(&data->TestText, FS_ITALIC);
-	}
-
-	if (Input_GetKeyDown('U'))
-	{
-		Text_SetFontStyle(&data->TestText, FS_UNDERLINE);
-	}
-
-	if (Input_GetKeyDown('S'))
-	{
-		Text_SetFontStyle(&data->TestText, FS_STRIKETHROUGH);
-	}
-
-	if (Input_GetKeyDown('N'))
-	{
-		Text_SetFontStyle(&data->TestText, FS_NORMAL);
-	}
-
-	if (Input_GetKeyDown('C'))
-	{
-		data->RenderMode = (data->RenderMode + 1) % 3;
-	}
-
-	if (Input_GetKey('1'))
-	{
-		--data->FontSize;
-		Text_SetFont(&data->TestText, "d2coding.ttf", data->FontSize);
-	}
-
-	if (Input_GetKey('2'))
-	{
-		++data->FontSize;
-		Text_SetFont(&data->TestText, "d2coding.ttf", data->FontSize);
-	}
-
-	if (Input_GetKeyDown(VK_SPACE))
+	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
 		Scene_SetNextScene(SCENE_MAIN);
 	}
@@ -109,34 +60,13 @@ void update_title(void)
 void render_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
-	for (int32 i = 0; i < 10; ++i)
+	Renderer_DrawImage(&data->TitleBackGroundImage, 0, 0);
+
+	Renderer_DrawImage(&data->GameStartImage, 559, 540);
+
+	if (data->CursorPos.X != 0 && data->CursorPos.Y != 0)
 	{
-		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 10, 20 * i, color);
-	}
-	
-	switch (data->RenderMode)
-	{
-	case SOLID:
-	{
-		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->TestText, 400, 400, color);
-	}
-	break;
-	case SHADED:
-	{
-		SDL_Color bg = { .a = 255 };
-		SDL_Color fg = { .r = 255, .g = 255, .a = 255 };
-		Renderer_DrawTextShaded(&data->TestText, 400, 400, fg, bg);
-	}
-	break;
-	case BLENDED:
-	{
-		Renderer_DrawImage(&data->TestImage, 400, 400);
-		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-		Renderer_DrawTextBlended(&data->TestText, 400, 400, color);
-	}
-	break;
+		Renderer_DrawImage(&data->CursorImage, data->CursorPos.X, data->CursorPos.Y);
 	}
 }
 
@@ -144,29 +74,25 @@ void release_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
-	for (int32 i = 0; i < 10; ++i)
-	{
-		Text_FreeText(&data->GuideLine[i]);
-	}
-	Text_FreeText(&data->TestText);
-
 	SafeFree(g_Scene.Data);
 }
 #pragma endregion
 
 #pragma region MainScene
 const wchar_t* str2[] = {
-	L"여기서는 사운드와 이미지 블렌딩에 대해서 알아봅시다.",
-	L"화살표키로 이미지를 이동시킬 수 있습니다.",
-	L"E키를 누르면 이펙트를 재생시킬 수 있습니다. 이펙트 소리가 작으니 볼륨을 낮춘 후 진행하세요.",
-	L"M키로 음악을 끄거나 켤 수 있습니다.",
-	L"P키로 음악을 멈추거나 재개할 수 있습니다.",
-	L"1번과 2번으로 볼륨을 조절할 수 있습니다.",
-	L"WASD로 이미지의 스케일을 조정할 수 있습니다.",
-	L"KL키로 이미지의 투명도를 조절할 수 있습니다."
+	L"결국 진범인 유 MC는 수갑을 차고 형사소송에서 무기징역을 선고 받았고",
+	L"여러 사람들의 악 이였던 김 PD가 사라지고 난 후 정 개그는 새로운 사랑을 찾아서 결혼에 성공 하였으며",
+	L" 박 가수는 억지 컨셉에 의한 호통 가수, 원조 호통남의 타이틀을 보고 따도남 (따뜻한 도시남자)및",
+	L"미중년 타이틀을 얻어 승승장구 하며 자신의 빵빵한 노후 대비 및 행복한 가정 생활을 하고 있고",
+	L"하 래퍼는 그 이후에 수 많은 히트곡과 명곡을 뽑아내며 한국 연예인 중 손 꼽히는 부자가 되었고",
+	L"하 래퍼 역시 할머니의 빈자리를 채워줄 새로운 사랑을 찾아 뜨거운 사랑 중입니다. 결혼 발표까지 났고요!",
+	L"그에 반에 정 배우는 직접적인 살인마가 되진 않았지만 이 사건이 공개되면서 대중에게 수많은 질타와 비난을 받았습니다…",
+	L"아마 연예계 복귀는 힘들지 않을까요? 그래도 감옥 생활을 하는게 아니라 다행이라 할 수 있겠군요.",
+	L"그리고 주인공인 강형사는 새로운 사건을 찾아 민중의 지팡이로써 열심히 일을 하고 있답니다. 조만간 승진 계획이 잡혔다네요!",
+	L"이렇게 해서 모두가 행복하진 않지만 나쁜사람 한 명의 죽음으로 여러 명이 행복하면 된게 아닐까요?"
 };
 
-#define GUIDELINE_COUNT 8
+#define GUIDELINE_COUNT 10
 
 typedef struct MainSceneData
 {
@@ -200,7 +126,7 @@ void init_main(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "d2coding.ttf", 16, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
 	}
 	
 	Image_LoadImage(&data->BackGround, "background.jfif");
@@ -324,7 +250,7 @@ void render_main(void)
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 10, 20 * i, color);
+		Renderer_DrawTextSolid(&data->GuideLine[i], 70, 60 + 30 * i, color);
 	}
 
 	Renderer_DrawImage(&data->BackGround, data->X, data->Y);
