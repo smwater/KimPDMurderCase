@@ -6,7 +6,7 @@
 #include "Framework/Window.h"
 
 App g_App;
-// Hi
+// Hi ?
 
 bool App_Init(void)
 {
