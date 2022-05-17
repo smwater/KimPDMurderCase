@@ -78,19 +78,27 @@ void release_title(void)
 
 #pragma region MainScene
 const wchar_t* str2[] = {
-	L"결국 진범인 유 MC는 수갑을 차고 형사소송에서 무기징역을 선고 받았고",
-	L"여러 사람들의 악 이였던 김 PD가 사라지고 난 후 정 개그는 새로운 사랑을 찾아서 결혼에 성공 하였으며",
-	L" 박 가수는 억지 컨셉에 의한 호통 가수, 원조 호통남의 타이틀을 보고 따도남 (따뜻한 도시남자)및",
-	L"미중년 타이틀을 얻어 승승장구 하며 자신의 빵빵한 노후 대비 및 행복한 가정 생활을 하고 있고",
-	L"하 래퍼는 그 이후에 수 많은 히트곡과 명곡을 뽑아내며 한국 연예인 중 손 꼽히는 부자가 되었고",
-	L"하 래퍼 역시 할머니의 빈자리를 채워줄 새로운 사랑을 찾아 뜨거운 사랑 중입니다. 결혼 발표까지 났고요!",
-	L"그에 반에 정 배우는 직접적인 살인마가 되진 않았지만 이 사건이 공개되면서 대중에게 수많은 질타와 비난을 받았습니다…",
-	L"아마 연예계 복귀는 힘들지 않을까요? 그래도 감옥 생활을 하는게 아니라 다행이라 할 수 있겠군요.",
-	L"그리고 주인공인 강형사는 새로운 사건을 찾아 민중의 지팡이로써 열심히 일을 하고 있답니다. 조만간 승진 계획이 잡혔다네요!",
-	L"이렇게 해서 모두가 행복하진 않지만 나쁜사람 한 명의 죽음으로 여러 명이 행복하면 된게 아닐까요?"
+	L"김 PD 살인사건",
+	L"",
+	L"(팀 이름)",
+	L"",
+	L"제작",
+	L"",
+	L"기획",
+	L"",
+	L"김 태희",
+	L"장 건",
+	L"",
+	L"프로그래밍",
+	L"",
+	L"박 현수",
+	L"성 권문",
+	L"김 동현",
+	L"",
+	L"The End"
 };
 
-#define GUIDELINE_COUNT 10
+#define GUIDELINE_COUNT 18
 
 typedef struct MainSceneData
 {
@@ -241,6 +249,8 @@ void update_main(void)
 	}
 }
 
+int upIndex = 0;
+
 void render_main(void)
 {
 	MainSceneData* data = (MainSceneData*)g_Scene.Data;
@@ -248,8 +258,10 @@ void render_main(void)
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 70, 60 + 30 * i, color);
+		Renderer_DrawTextSolid(&data->GuideLine[i], 600, 900 + 30 * i - upIndex, color);
 	}
+
+	upIndex += 5;
 
 	Renderer_DrawImage(&data->BackGround, data->X, data->Y);
 }
