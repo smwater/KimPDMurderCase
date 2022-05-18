@@ -51,7 +51,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_MAIN);
+		Scene_SetNextScene(SCENE_ENDING);
 	}
 }
 
@@ -76,7 +76,7 @@ void release_title(void)
 }
 #pragma endregion
 
-#pragma region MainScene
+#pragma region EndingScene
 const wchar_t* str2[] = {
 	L"±Ë PD ªÏ¿ŒªÁ∞«",
 	L"",
@@ -100,7 +100,7 @@ const wchar_t* str2[] = {
 
 #define GUIDELINE_COUNT 18
 
-typedef struct MainSceneData
+typedef struct EndingSceneData
 {
 	Text		GuideLine[GUIDELINE_COUNT];
 	Music		BGM;
@@ -111,7 +111,7 @@ typedef struct MainSceneData
 	int32		X;
 	int32		Y;
 	int32		Alpha;
-} MainSceneData;
+} EndingSceneData;
 
 void logOnFinished(void)
 {
@@ -123,12 +123,12 @@ void log2OnFinished(int32 channel)
 	LogInfo("You can show this log on stopped the effect");
 }
 
-void init_main(void)
+void init_ending(void)
 {
-	g_Scene.Data = malloc(sizeof(MainSceneData));
-	memset(g_Scene.Data, 0, sizeof(MainSceneData));
+	g_Scene.Data = malloc(sizeof(EndingSceneData));
+	memset(g_Scene.Data, 0, sizeof(EndingSceneData));
 
-	MainSceneData* data = (MainSceneData*)g_Scene.Data;
+	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
@@ -151,9 +151,9 @@ void init_main(void)
 	data->Alpha = 255;
 }
 
-void update_main(void)
+void update_ending(void)
 {
-	MainSceneData* data = (MainSceneData*)g_Scene.Data;
+	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
 	if (Input_GetKeyDown('E'))
 	{
@@ -251,9 +251,9 @@ void update_main(void)
 
 int upIndex = 0;
 
-void render_main(void)
+void render_ending(void)
 {
-	MainSceneData* data = (MainSceneData*)g_Scene.Data;
+	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
@@ -266,9 +266,9 @@ void render_main(void)
 	Renderer_DrawImage(&data->BackGround, data->X, data->Y);
 }
 
-void release_main(void)
+void release_ending(void)
 {
-	MainSceneData* data = (MainSceneData*)g_Scene.Data;
+	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
 	for (int32 i = 0; i < 10; ++i)
 	{
@@ -318,11 +318,11 @@ void Scene_Change(void)
 		g_Scene.Render = render_title;
 		g_Scene.Release = release_title;
 		break;
-	case SCENE_MAIN:
-		g_Scene.Init = init_main;
-		g_Scene.Update = update_main;
-		g_Scene.Render = render_main;
-		g_Scene.Release = release_main;
+	case SCENE_ENDING:
+		g_Scene.Init = init_ending;
+		g_Scene.Update = update_ending;
+		g_Scene.Render = render_ending;
+		g_Scene.Release = release_ending;
 		break;
 	}
 
