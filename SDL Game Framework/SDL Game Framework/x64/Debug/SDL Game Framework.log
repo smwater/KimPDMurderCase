@@ -1,9 +1,20 @@
-﻿  Scene.c
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(135,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(201,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(206,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(211,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(216,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  App.c
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\App.c(19,27): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\App.c(26,29): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  Image.c
+  Renderer.c
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(35,21): warning C4244: '초기화 중': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(36,22): warning C4244: '초기화 중': 'const float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(43,59): warning C4133: '함수': 'TTF_Font *const '과(와) 'TTF_Font *' 사이의 형식이 호환되지 않습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(55,60): warning C4133: '함수': 'TTF_Font *const '과(와) 'TTF_Font *' 사이의 형식이 호환되지 않습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Renderer.c(67,61): warning C4133: '함수': 'TTF_Font *const '과(와) 'TTF_Font *' 사이의 형식이 호환되지 않습니다.
+  Scene.c
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(138,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(204,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(209,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(214,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(219,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   SDL Game Framework.vcxproj -> C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
@@ -33,4 +44,5 @@ C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Fr
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect.wav
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect2.wav
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\powerful.mp3
-  10개 파일이 복사되었습니다.
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\vol1_06_Karmain's Theme.wav
+  11개 파일이 복사되었습니다.

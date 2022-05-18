@@ -15,6 +15,7 @@ typedef struct TitleSceneData
 	Image	GameStartImage;
 	Image	CursorImage;
 	COORD	CursorPos;
+	Music	BGM;
 } TitleSceneData;
 
 void init_title(void)
@@ -25,10 +26,11 @@ void init_title(void)
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
 	Image_LoadImage(&data->TitleBackGroundImage, "TitleImage.png");
-
 	Image_LoadImage(&data->GameStartImage, "GameStartImage.png");
-
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
+
+	Audio_LoadMusic(&data->BGM, "vol1_06_Karmain's Theme.wav");
+	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
 }
 
 #define GameStartPosX 528
@@ -38,12 +40,12 @@ void update_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
-	if ((Input_GetKeyDown(VK_LEFT) || Input_GetKeyDown(VK_RIGHT)) && data->CursorPos.X == 0 && data->CursorPos.Y == 0)
+	if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.X == 0 && data->CursorPos.Y == 0)
 	{
 		data->CursorPos.X = GameStartPosX;
 		data->CursorPos.Y = GameStartPosY;
 	}
-	else if ((Input_GetKeyDown(VK_LEFT) || Input_GetKeyDown(VK_RIGHT)) && data->CursorPos.X != 0 && data->CursorPos.Y != 0)
+	else if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.X != 0 && data->CursorPos.Y != 0)
 	{
 		data->CursorPos.X = 0;
 		data->CursorPos.Y = 0;
@@ -72,6 +74,7 @@ void release_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
+	Audio_FreeMusic(&data->BGM);
 	SafeFree(g_Scene.Data);
 }
 #pragma endregion
