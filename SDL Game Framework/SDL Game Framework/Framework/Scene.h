@@ -1,6 +1,7 @@
 #pragma once
-
 #include "Type.h"
+
+#define GUIDELINE_COUNT 18
 
 typedef struct Scene
 {
@@ -15,6 +16,7 @@ typedef enum SceneType
 {
 	SCENE_NULL,
 	SCENE_TITLE,
+	SCENE_CONTENT,
 	SCENE_ENDING,
 	SCENE_MAX
 } ESceneType;

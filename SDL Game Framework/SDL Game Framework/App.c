@@ -1,9 +1,13 @@
+#include <crtdbg.h>
+
 #include "stdafx.h"
 #include "App.h"
 
 #include "Framework.h"
 #include "Framework/Scene.h"
 #include "Framework/Window.h"
+#include "csv.h"
+#include "Framework/Scene.h"
 
 App g_App;
 
@@ -52,6 +56,12 @@ bool App_Init(void)
 
 		return false;
 	}
+
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	CsvFile csvFile;
+	memset(&csvFile, 0, sizeof(CsvFile));
+	CreateCsvFile(&csvFile, "test.csv");
 
 	return true;
 }

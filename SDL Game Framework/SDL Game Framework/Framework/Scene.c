@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Scene.h"
-
+#include "csv.h"
 #include "Framework.h"
 
 Scene g_Scene;
@@ -53,7 +53,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_ENDING);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 }
 
@@ -79,6 +79,49 @@ void release_title(void)
 }
 #pragma endregion
 
+#pragma region ContentScene
+typedef struct tagSelect {
+	wchar_t* selectContent;
+	int nextIndex;
+} Select;
+
+typedef struct tagConetentSceneData {
+	Text GuideLine[GUIDELINE_COUNT];
+	int id;
+	wchar_t* contentText;
+} ContentSceneData;
+
+void init_content(void)
+{
+	g_Scene.Data = malloc(sizeof(ContentSceneData));
+	memset(g_Scene.Data, 0, sizeof(ContentSceneData));
+
+	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
+
+	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	{
+		//Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
+	}
+}
+
+void update_content(void)
+{
+	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
+	
+}
+void render_content(void)
+{
+	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
+
+}
+
+void release_content(void)
+{
+	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
+
+}
+#pragma endregion
+
 #pragma region EndingScene
 const wchar_t* str2[] = {
 	L"±Ë PD ªÏ¿ŒªÁ∞«",
@@ -100,8 +143,6 @@ const wchar_t* str2[] = {
 	L"",
 	L"The End"
 };
-
-#define GUIDELINE_COUNT 18
 
 typedef struct EndingSceneData
 {
@@ -315,6 +356,12 @@ void Scene_Change(void)
 		g_Scene.Update = update_title;
 		g_Scene.Render = render_title;
 		g_Scene.Release = release_title;
+		break;
+	case SCENE_CONTENT:
+		g_Scene.Init = init_content;
+		g_Scene.Update = update_content;
+		g_Scene.Render = render_content;
+		g_Scene.Release = release_content;
 		break;
 	case SCENE_ENDING:
 		g_Scene.Init = init_ending;
