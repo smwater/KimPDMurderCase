@@ -242,11 +242,6 @@ void update_ending(void)
 		Image_SetAlphaValue(&data->BackGround, data->Alpha);
 	}
 
-	if (Input_GetKey('L'))
-	{
-		data->Alpha = Clamp(0, data->Alpha + 1, 255);
-		Image_SetAlphaValue(&data->BackGround, data->Alpha);
-	}
 }
 
 int upIndex = 0;
