@@ -10,13 +10,55 @@ bool isFadeOut = false; // 사진 흐려지는 효과
 bool isLeftDisappear = false; // 사진 왼쪽으로 없어지는 효과
 bool isRightDisappear = false; // 사진 오른쪽으로 없어지는 효과
 
-
 float addSecond = 0.0f;
 
-void Fade_InOut(Image* BackGround, int32 Alpha)
+void Scale_Down(Image* BackGround)
 {
 
-	if (Input_GetKey(VK_F3) && !isFadeOut)
+
+	if (Input_GetKey(VK_F1))
+	{
+		isScaleDown = true;
+	}
+
+	if (isScaleDown)
+	{
+		addSecond += Timer_GetDeltaTime();
+		BackGround->ScaleX -= 0.1 * (int)Timer_GetDeltaTime();
+		BackGround->ScaleY -= 0.1 * (int)Timer_GetDeltaTime();
+		if (addSecond > 40)
+		{
+			isScaleDown = false;
+			addSecond = 0;
+		}
+	}
+}
+
+void Scale_Up(Image* BackGround)
+{
+
+
+	if (Input_GetKey(VK_F2))
+	{
+		isScaleUp = true;
+	}
+
+	if (isScaleUp)
+	{
+		addSecond += Timer_GetDeltaTime();
+		BackGround->ScaleX += 0.1 * (int)Timer_GetDeltaTime();
+		BackGround->ScaleY += 0.1 * (int)Timer_GetDeltaTime();
+		if (addSecond > 40)
+		{
+			isScaleUp = false;
+			addSecond = 0;
+		}
+	}
+}
+
+void Fade_Out(Image* BackGround, int32 Alpha)
+{
+	if (Input_GetKey(VK_F3))
 	{
 		isFadeOut = true;
 	}
@@ -32,16 +74,22 @@ void Fade_InOut(Image* BackGround, int32 Alpha)
 			addSecond = 0.0f;
 		}
 	}
+}
 
-	if (Input_GetKey(VK_F4) && !isFadeIn)
+void Fade_In(Image* BackGround, int32 Alpha)
+{
+
+
+	if (Input_GetKey(VK_F4))
 	{
 		isFadeIn = true;
 	}
 
 	if (isFadeIn)
 	{
+		Alpha = 20;
 		addSecond += Timer_GetDeltaTime();
-		Alpha = Clamp(0, Alpha + addSecond, 50);
+		Alpha = Clamp(0, Alpha + addSecond, 255);
 		Image_SetAlphaValue(BackGround, Alpha);
 		if (Alpha > 253)
 		{
@@ -51,76 +99,45 @@ void Fade_InOut(Image* BackGround, int32 Alpha)
 	}
 }
 
-void Scale_UpDown(Image* BackGround)
-{
-	addSecond += Timer_GetDeltaTime();
+//void Move_Left(Image* BackGround, int32 X, int32 Y)
+//{
+//
+//
+//	if (Input_GetKey(VK_F5))
+//	{
+//		isLeftDisappear = true;
+//	}
+//
+//	if (isLeftDisappear)
+//	{
+//		addSecond += Timer_GetDeltaTime();
+//		X -= (int)Timer_GetDeltaTime() * 0.3;
+//		if (X < 100)
+//		{
+//			isLeftDisappear = false;
+//			addSecond = 0;
+//		}
+//	}
+//}
+//
+//void Move_Right(Image* BackGround, int32 X, int32 Y)
+//{
+//
+//
+//	if (Input_GetKey(VK_F6))
+//	{
+//		isRightDisappear = true;
+//	}
+//
+//	if (isRightDisappear)
+//	{
+//		addSecond += Timer_GetDeltaTime();
+//		X += (int)Timer_GetDeltaTime() * 0.3;
+//		if (X > 600)
+//		{
+//			isRightDisappear = false;
+//			addSecond = 0;
+//		}
+//	}
+//}
 
-	if (Input_GetKey(VK_F1))
-	{
-		isScaleUp = true;
-	}
-
-	if (Input_GetKey(VK_F2))
-	{
-		isScaleDown = true;
-	}
-
-
-	if (isScaleDown)
-	{
-		BackGround->ScaleX -= (0.05f * Timer_GetDeltaTime());
-		BackGround->ScaleY -= (0.05f * Timer_GetDeltaTime());
-		if (addSecond > 40)
-		{
-			isScaleDown = false;
-			addSecond = 0;
-		}
-	}
-
-	if (isScaleUp)
-	{
-		BackGround->ScaleX += (0.05f * Timer_GetDeltaTime());
-		BackGround->ScaleY += (0.05f * Timer_GetDeltaTime());
-		if (addSecond > 40)
-		{
-			isScaleUp = false;
-			addSecond = 0;
-		}
-	}
-}
-
-void Move_LeftRight(Image* BackGround, int32 X, int32 Y)
-{
-	addSecond += Timer_GetDeltaTime();
-
-	if (Input_GetKey(VK_F5))
-	{
-		isLeftDisappear = true;
-	}
-
-	if (Input_GetKey(VK_F6))
-	{
-		isRightDisappear = true;
-	}
-
-
-	if (isLeftDisappear)
-	{
-		X -= Timer_GetDeltaTime() * 0.3;
-		if (X < 100)
-		{
-			isLeftDisappear = false;
-			addSecond = 0;
-		}
-	}
-
-	if (isRightDisappear)
-	{
-		X += Timer_GetDeltaTime() * 0.3;
-		if (X > 600)
-		{
-			isRightDisappear = false;
-			addSecond = 0;
-		}
-	}
-}

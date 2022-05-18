@@ -1,35 +1,40 @@
 ﻿  ImageEffect.c
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(26,34): warning C4013: 'Timer_GetDeltaTime'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(27,11): warning C4244: '=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(44,11): warning C4244: '=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(92,28): warning C4028: 정식 매개 변수 1이(가) 선언과 다릅니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(93,1): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(109,29): warning C4244: '-=': 'double'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(119,29): warning C4244: '+=': 'double'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(127,20): warning C4013: 'Renderer_DrawImage'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  SDL Game Framework.vcxproj -> C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\x64\Debug\SDL Game Framework.exe
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libmodplug-1.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libmpg123-0.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libogg-0.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libopus-0.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libopusfile-0.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libpng16-16.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libtiff-5.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libvorbis-0.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libvorbisfile-3.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\libwebp-7.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\SDL2.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\SDL2_image.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\SDL2_mixer.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\SDL2_ttf.dll
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\External\Lib\SDL2\zlib1.dll
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(26,34): warning C4013: 'Timer_GetDeltaTime' undefined; assuming extern returning int
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(27,29): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(28,29): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(49,29): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(50,29): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(69,11): warning C4244: '=': conversion from 'float' to 'int32', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(92,11): warning C4244: '=': conversion from 'float' to 'int32', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(113,34): warning C4244: '-=': conversion from 'double' to 'int32', possible loss of data
+C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\ImageEffect.c(133,34): warning C4244: '+=': conversion from 'double' to 'int32', possible loss of data
+  SDL Game Framework.vcxproj -> C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmodplug-1.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmpg123-0.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libogg-0.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopus-0.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopusfile-0.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libpng16-16.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libtiff-5.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbis-0.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbisfile-3.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libwebp-7.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_image.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_mixer.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_ttf.dll
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\zlib1.dll
          17개 파일이 복사되었습니다.
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Font\d2coding.ttf
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Image\Background.jfif
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Image\Background2.jfif
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Sound\effect.wav
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Sound\effect2.wav
-  C:\Users\zpzps\Desktop\SDL-Game-Framework-main\SDL Game Framework\SDL Game Framework\Asset\Sound\powerful.mp3
-  6개 파일이 복사되었습니다.
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\d2coding.ttf
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicBold.ttf
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background.jfif
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background2.jfif
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\CursorImage.png
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\GameStartImage.png
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\TitleImage.png
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect.wav
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect2.wav
+  C:\Users\Artsung\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\powerful.mp3
+  10개 파일이 복사되었습니다.

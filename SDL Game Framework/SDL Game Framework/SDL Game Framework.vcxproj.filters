@@ -43,9 +43,6 @@
     <ClCompile Include="Framework\Text.c">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Csv.c">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\ImageEffect.c">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -83,9 +80,6 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Text.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Csv.h">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\ImageEffect.h">
