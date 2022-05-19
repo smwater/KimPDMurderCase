@@ -29,7 +29,7 @@ void init_title(void)
 	Image_LoadImage(&data->GameStartImage, "GameStartImage.png");
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 
-	Audio_LoadMusic(&data->BGM, "vol1_06_Karmain's Theme.wav");
+	Audio_LoadMusic(&data->BGM, "Background.mp3");
 	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
 }
 
@@ -53,7 +53,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_CONTENT);
+		Scene_SetNextScene(SCENE_ENDING);
 	}
 }
 
@@ -88,7 +88,7 @@ typedef struct tagSelect {
 typedef struct tagConetentSceneData {
 	Text GuideLine[GUIDELINE_COUNT];
 	int id;
-	wchar_t* contentText;
+	wchar_t* contentText;	// GuideLine.String에 집어넣어야 함
 } ContentSceneData;
 
 void init_content(void)
@@ -112,13 +112,11 @@ void update_content(void)
 void render_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
-
 }
 
 void release_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
-
 }
 #pragma endregion
 
@@ -157,16 +155,6 @@ typedef struct EndingSceneData
 	int32		Alpha;
 } EndingSceneData;
 
-void logOnFinished(void)
-{
-	LogInfo("You can show this log on stopped the music");
-}
-
-void log2OnFinished(int32 channel)
-{
-	LogInfo("You can show this log on stopped the effect");
-}
-
 void init_ending(void)
 {
 	g_Scene.Data = malloc(sizeof(EndingSceneData));
@@ -178,13 +166,8 @@ void init_ending(void)
 	{
 		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
 	}
-	
-	Image_LoadImage(&data->BackGround, "background.jfif");
 
-	Audio_LoadMusic(&data->BGM, "powerful.mp3");
-	Audio_HookMusicFinished(logOnFinished);
-	Audio_LoadSoundEffect(&data->Effect, "effect2.wav");
-	Audio_HookSoundEffectFinished(log2OnFinished);
+	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
 	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
 
 	data->Volume = 1.0f;
@@ -199,96 +182,9 @@ void update_ending(void)
 {
 	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
-	if (Input_GetKeyDown('E'))
-	{
-		Audio_PlaySoundEffect(&data->Effect, 1);
-	}
-
-	if (Input_GetKeyDown('M'))
-	{
-		if (Audio_IsMusicPlaying())
-		{
-			Audio_Stop();
-		}
-		else
-		{
-			Audio_Play(&data->BGM, INFINITY_LOOP);
-		}
-	}
-
-	if (Input_GetKeyDown('P'))
-	{
-		if (Audio_IsMusicPaused())
-		{
-			Audio_Resume();
-		}
-		else
-		{
-			Audio_Pause();
-		}
-	}
-
-	if (Input_GetKey('1'))
-	{
-		data->Volume -= 0.01f;
-		Audio_SetVolume(data->Volume);
-	}
-
-	if (Input_GetKey('2'))
-	{
-		data->Volume += 0.01f;
-		Audio_SetVolume(data->Volume);
-	}
-
-	if (Input_GetKey(VK_DOWN))
-	{
-		data->Y += data->Speed * Timer_GetDeltaTime();
-	}
-
-	if (Input_GetKey(VK_UP))
-	{
-		data->Y -= data->Speed * Timer_GetDeltaTime();
-	}
-
-	if (Input_GetKey(VK_LEFT))
-	{
-		data->X -= data->Speed * Timer_GetDeltaTime();
-	}
-
-	if (Input_GetKey(VK_RIGHT))
-	{
-		data->X += data->Speed * Timer_GetDeltaTime();
-	}
-
-	if (Input_GetKey('W'))
-	{
-		data->BackGround.ScaleY -= 0.05f;
-	}
-
-	if (Input_GetKey('S'))
-	{
-		data->BackGround.ScaleY += 0.05f;
-	}
-
-	if (Input_GetKey('A'))
-	{
-		data->BackGround.ScaleX -= 0.05f;
-	}
-
-	if (Input_GetKey('D'))
-	{
-		data->BackGround.ScaleX += 0.05f;
-	}
-
-	if (Input_GetKey('K'))
-	{
-		data->Alpha = Clamp(0, data->Alpha - 1, 255);
-		Image_SetAlphaValue(&data->BackGround, data->Alpha);
-	}
-
 }
 
-int upIndex = 0;
+int upPixel = 0;
 
 void render_ending(void)
 {
@@ -297,12 +193,10 @@ void render_ending(void)
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 600, 900 + 30 * i - upIndex, color);
+		Renderer_DrawTextSolid(&data->GuideLine[i], 600, 900 + 30 * i - upPixel, color);
 	}
 
-	upIndex += 5;
-
-	Renderer_DrawImage(&data->BackGround, data->X, data->Y);
+	upPixel += 5;
 }
 
 void release_ending(void)

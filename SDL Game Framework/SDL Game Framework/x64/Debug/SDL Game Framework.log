@@ -1,13 +1,5 @@
-﻿  App.c
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\App.c(23,27): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\App.c(30,29): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
-  Scene.c
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(179,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(245,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(250,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(255,26): warning C4244: '-=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(260,26): warning C4244: '+=': 'float'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
+﻿  Scene.c
+C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(167,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   SDL Game Framework.vcxproj -> C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
@@ -29,13 +21,21 @@ C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Fr
          17개 파일이 복사되었습니다.
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\d2coding.ttf
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicBold.ttf
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background.jfif
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Background2.jfif
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\CursorImage.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Filming Site.png
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\GameStartImage.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\HaRapper_lodgment.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor_Office.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag_Room.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_House.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_Office.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Meeting Room.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger_House.png
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\TitleImage.png
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect.wav
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\effect2.wav
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\WallPaper.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC_Office.png
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Background.mp3
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Denouement.mp3
+  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Ending.mp3
   C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\powerful.mp3
-  C:\Users\KGA_!6\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\vol1_06_Karmain's Theme.wav
-  11개 파일이 복사되었습니다.
+  19개 파일이 복사되었습니다.
