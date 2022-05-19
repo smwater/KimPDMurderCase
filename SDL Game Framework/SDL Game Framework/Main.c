@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "App.h"
+#include "Framework/CsvParser.h"
 
 int main(int argc, char* argv[])
 {

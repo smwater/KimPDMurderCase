@@ -4,8 +4,11 @@
 #include "Framework.h"
 #include "Framework/Scene.h"
 #include "Framework/Window.h"
+#include "Framework/Scene.h"
 
 App g_App;
+
+bool isOpened = false;
 
 bool App_Init(void)
 {
@@ -51,6 +54,12 @@ bool App_Init(void)
 		LogWithErrorCode("Fail to initialize font library", TTF_GetError());
 
 		return false;
+	}
+
+	if (!isOpened)
+	{
+		InitCsvParse();
+		isOpened = true;
 	}
 
 	return true;
@@ -117,7 +126,6 @@ int32 App_Run(void)
 	}
 
 	g_Scene.Release();
-
 
 	return 0;
 }
