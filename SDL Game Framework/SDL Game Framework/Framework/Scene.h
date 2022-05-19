@@ -2,7 +2,7 @@
 #include "Type.h"
 #include "Text.h"
 
-#define GUIDELINE_COUNT 18
+#define GUIDELINE_COUNT 10
 
 typedef struct Scene
 {
