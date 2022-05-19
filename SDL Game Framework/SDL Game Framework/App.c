@@ -1,15 +1,14 @@
-#include <crtdbg.h>
-
 #include "stdafx.h"
 #include "App.h"
 
 #include "Framework.h"
 #include "Framework/Scene.h"
 #include "Framework/Window.h"
-#include "csv.h"
 #include "Framework/Scene.h"
 
 App g_App;
+
+bool isOpened = false;
 
 bool App_Init(void)
 {
@@ -57,11 +56,11 @@ bool App_Init(void)
 		return false;
 	}
 
-	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-	CsvFile csvFile;
-	memset(&csvFile, 0, sizeof(CsvFile));
-	CreateCsvFile(&csvFile, "test.csv");
+	if (!isOpened)
+	{
+		InitCsvParse();
+		isOpened = true;
+	}
 
 	return true;
 }
@@ -127,7 +126,6 @@ int32 App_Run(void)
 	}
 
 	g_Scene.Release();
-
 
 	return 0;
 }

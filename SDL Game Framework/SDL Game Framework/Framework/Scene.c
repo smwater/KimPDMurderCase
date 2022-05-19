@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Scene.h"
-#include "csv.h"
 #include "Framework.h"
+#include "CsvParser.h"
 
 Scene g_Scene;
 
@@ -53,7 +53,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_ENDING);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 }
 
@@ -80,6 +80,7 @@ void release_title(void)
 #pragma endregion
 
 #pragma region ContentScene
+
 typedef struct tagSelect {
 	wchar_t* selectContent;
 	int nextIndex;
@@ -89,6 +90,8 @@ typedef struct tagConetentSceneData {
 	Text GuideLine[GUIDELINE_COUNT];
 	int id;
 	wchar_t* contentText;	// GuideLine.String에 집어넣어야 함
+	int32 X;
+	int32 Y;
 } ContentSceneData;
 
 void init_content(void)
@@ -100,8 +103,10 @@ void init_content(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		//Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, ReturnContentText(1), wcslen(ReturnContentText(1)));
 	}
+
+
 }
 
 void update_content(void)
@@ -112,6 +117,13 @@ void update_content(void)
 void render_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
+
+	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	{
+		SDL_Color color = { .a = 255 };
+		Renderer_DrawTextSolid(&data->GuideLine[i], 600, 100 + 30 * i, color);
+	}
+
 }
 
 void release_content(void)
@@ -124,7 +136,7 @@ void release_content(void)
 const wchar_t* str2[] = {
 	L"김 PD 살인사건",
 	L"",
-	L"(팀 이름)",
+	L"하이파이브",
 	L"",
 	L"제작",
 	L"",
