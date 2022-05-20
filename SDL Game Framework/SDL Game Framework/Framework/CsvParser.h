@@ -11,6 +11,7 @@ void InitCsvParse(void);
 /// </summary>
 /// <param name="id">현재 씬의 인덱스</param>
 /// <returns>내용 텍스트를 반환한다.</returns>
+/// 수정해야함 참고 금지
 wchar_t** ReturnContentText(int id);
 
 /// <summary>
@@ -19,6 +20,13 @@ wchar_t** ReturnContentText(int id);
 /// <param name="id">현재 씬의 인덱스</param>
 /// <returns>선택지1로 넘어가는 화면의 인덱스를 반환한다.</returns>
 int ReturnSelect1Index(int id);
+
+/// <summary>
+/// 선택지2로 넘어가는 화면의 인덱스를 반환한다.
+/// </summary>
+/// <param name="id">현재 씬의 인덱스</param>
+/// <returns>선택지2로 넘어가는 화면의 인덱스를 반환한다.</returns>
+int ReturnSelect2Index(int id);
 
 /// <summary>
 /// 현재 씬의 음악 이름을 반환한다.

@@ -43,13 +43,25 @@ wchar_t** ReturnContentText(int id)
 	return str;
 }
 
+// ParseToUnicord : L"1"
+// ParseToAscii   :  "1"
+// ParseToInt     :   1
 int ReturnSelect1Index(int id)
 {
 	int Select1Index;
 
-	Select1Index = ParseToUnicode(csvFile.Items[id][4]);
+	Select1Index = ParseToInt(csvFile.Items[id][4]);
 
 	return Select1Index;
+}
+
+int ReturnSelect2Index(int id)
+{
+	int Select2Index;
+
+	Select2Index = ParseToInt(csvFile.Items[id][5]);
+
+	return Select2Index;
 }
 
 char* ReturnBGMName(int id)

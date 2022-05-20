@@ -96,7 +96,7 @@ typedef struct tagConetentSceneData {
 	int32 Y;
 } ContentSceneData;
 
-int id = 1;
+int id = 70;
 
 void init_content(void)
 {
