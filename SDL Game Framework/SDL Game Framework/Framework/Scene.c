@@ -30,7 +30,7 @@ void init_title(void)
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 
 	Audio_LoadMusic(&data->BGM, "Background.mp3");
-	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
+	Audio_Play(&data->BGM, INFINITY_LOOP);
 }
 
 #define GameStartPosX 528
@@ -60,8 +60,8 @@ void update_title(void)
 void render_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
-	Renderer_DrawImage(&data->TitleBackGroundImage, 0, 0);
 
+	Renderer_DrawImage(&data->TitleBackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->GameStartImage, 559, 540);
 
 	if (data->CursorPos.X != 0 && data->CursorPos.Y != 0)
@@ -87,6 +87,7 @@ typedef struct tagSelect {
 } Select;
 
 typedef struct tagConetentSceneData {
+	Image BackGroundImage;
 	Text GuideLine[GUIDELINE_COUNT];
 	int id;
 	wchar_t* contentText;	// GuideLine.String에 집어넣어야 함
@@ -95,6 +96,8 @@ typedef struct tagConetentSceneData {
 	int32 Y;
 } ContentSceneData;
 
+int id = 70;
+
 void init_content(void)
 {
 	g_Scene.Data = malloc(sizeof(ContentSceneData));
@@ -102,19 +105,21 @@ void init_content(void)
 
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
-	Audio_LoadMusic(&data->BGM, ReturnMusicName(1));
+	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(id));
+
+	Audio_LoadMusic(&data->BGM, ReturnBGMName(id));
 	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
 
 	//Text_CreateText(&data->GuideLine[0], "GongGothicLight.ttf", 20, ReturnContentText(1), wcslen(ReturnContentText(1)));
 
-	const wchar_t* str2[] = {
+	/*const wchar_t* str2[] = {
 		ReturnContentText(1)
 	}; 
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
-	}
+	}*/
 
 
 }
@@ -128,14 +133,15 @@ void render_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
+	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	/*SDL_Color color = { .a = 255 };
 	Renderer_DrawTextSolid(&data->GuideLine[0], 50, 100, color);*/
 
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	/*for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		SDL_Color color = { .a = 255 };
 		Renderer_DrawTextSolid(&data->GuideLine[i], 50, 100 + 30 * i, color);
-	}
+	}*/
 
 }
 
