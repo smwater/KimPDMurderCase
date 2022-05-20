@@ -109,16 +109,12 @@ void init_content(void)
 	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(id));
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
-	Audio_LoadMusic(&data->BGM, ReturnBGMName(id));
+	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
 	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
-
-	/*const wchar_t* myStr = ReturnContentText(id, 8);
-	Text_CreateText(&data->GuideLine[0], "GongGothicBold.ttf", 20, myStr, wcslen(myStr));*/
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; i++)
 	{
 		wchar_t* myStr = ReturnContentText(id, i);
-
 		Text_CreateText(&data->GuideLine[i], "GongGothicLight.ttf", 20, myStr, wcslen(myStr));
 	}
 
@@ -135,9 +131,6 @@ void render_content(void)
 
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
-
-	/*SDL_Color color = { .a = 255 };
-	Renderer_DrawTextSolid(&data->GuideLine[0], 50, 100, color);*/
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
