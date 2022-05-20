@@ -108,14 +108,14 @@ void init_content(void)
 	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
 	Audio_Play(&data->BGM, INFINITY_LOOP);
 	
-	/*for (int32 i = 0; i < 2; i++)
+	for (int32 i = 0; i < 2; i++)
 	{
 		if (SoundEffectExisted(id, i))
 		{
 			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(id, i));
 			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
 		}
-	}*/
+	}
 
 	if (TitleExisted(id))
 	{
@@ -175,13 +175,13 @@ void release_content(void)
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
 	Audio_FreeMusic(&data->BGM);
-	/*for (int32 i = 0; i < 2; i++)
+	for (int32 i = 0; i < 2; i++)
 	{
 		if (SoundEffectExisted(id, i))
 		{
 			Audio_FreeSoundEffect(&data->Effect[i]);
 		}
-	}*/
+	}
 	
 	SafeFree(g_Scene.Data);
 }

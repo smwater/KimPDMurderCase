@@ -33,7 +33,7 @@ wchar_t* ReturnTitleText(int32 id)
 
 bool TitleExisted(int32 id)
 {
-	if (NULL == ParseToUnicode(csvFile.Items[id][1]))
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][1])))
 	{
 		return false;
 	}
@@ -114,7 +114,7 @@ wchar_t* ReturnSelect(int32 id, int32 selectNum)
 
 bool SelectExisted(int32 id, int32 selectNum)
 {
-	if (NULL == ParseToUnicode(csvFile.Items[id][3 + selectNum]))
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][3 + selectNum])))
 	{
 		return false;
 	}
@@ -167,11 +167,10 @@ char* ReturnSoundEffect(int32 id, int32 effectNum)
 	return SoundEffect;
 }
 
-// 효과음의 예외처리가 안된다
-// 우째서 으아악
+// 갓중재께서 해결해주심
 bool SoundEffectExisted(int32 id, int32 effectNum)
 {
-	if (NULL == ParseToUnicode(csvFile.Items[id][10 + effectNum]))
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][10 + effectNum])))
 	{
 		return false;
 	}
