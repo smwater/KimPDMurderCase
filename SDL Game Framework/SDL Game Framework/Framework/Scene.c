@@ -80,24 +80,18 @@ void release_title(void)
 #pragma endregion
 
 #pragma region ContentScene
-
-typedef struct tagSelect {
-	wchar_t* selectContent;
-	int nextIndex;
-} Select;
-
 typedef struct tagConetentSceneData {
+	int id;
 	Image BackGroundImage;
 	Image BackPaper;
-	Text GuideLine[GUIDELINE_COUNT];
-	int id;
-	wchar_t* contentText;	// GuideLine.String에 집어넣어야 함
 	Music BGM;
+	Text TitleLine[1];
+	Text GuideLine[GUIDELINE_COUNT];
 	int32 X;
 	int32 Y;
 } ContentSceneData;
 
-int32 id = 30;
+int32 id = 66;
 
 void init_content(void)
 {
@@ -112,10 +106,16 @@ void init_content(void)
 	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
 	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
 
+	if (TitleExisted(id))
+	{
+		wchar_t* title = ReturnTitleText(id);
+		Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, wcslen(title));
+	}
+
 	for (int32 i = 0; i < GUIDELINE_COUNT; i++)
 	{
-		wchar_t* myStr = ReturnContentText(id, i);
-		Text_CreateText(&data->GuideLine[i], "GongGothicLight.ttf", 20, myStr, wcslen(myStr));
+		wchar_t* content = ReturnContentText(id, i);
+		Text_CreateText(&data->GuideLine[i], "GongGothicLight.ttf", 20, content, wcslen(content));
 	}
 
 }
@@ -132,10 +132,16 @@ void render_content(void)
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
+	if (TitleExisted(id))
+	{
+		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+		Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
+	}
+
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
 		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 50, 100 + 30 * i, color);
+		Renderer_DrawTextSolid(&data->GuideLine[i], 100, 150 + 40 * i, color);
 	}
 
 }

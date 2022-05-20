@@ -14,6 +14,13 @@ void InitCsvParse(void);
 wchar_t* ReturnTitleText(int32 id);
 
 /// <summary>
+/// 현재 씬에서 타이틀이 존재하는지 확인한다.
+/// </summary>
+/// <param name="id">현재 씬의 인덱스</param>
+/// <returns>타이틀이 존재하면 true, 아니면 false.</returns>
+bool TitleExisted(int32 id);
+
+/// <summary>
 /// 현재 씬의 내용 텍스트를 한 줄씩 반환한다.
 /// </summary>
 /// <param name="id">현재 씬의 인덱스</param>

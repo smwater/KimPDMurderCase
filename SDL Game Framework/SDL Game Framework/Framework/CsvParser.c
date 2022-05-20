@@ -16,11 +16,29 @@ void InitCsvParse(void)
 
 wchar_t* ReturnTitleText(int32 id)
 {
-	wchar_t* titleText;
+	static wchar_t titleText[128] = { L"\0" };
 	
-	titleText = ParseToUnicode(csvFile.Items[id][1]);
+	wchar_t* temp = ParseToUnicode(csvFile.Items[id][1]);
+
+	int count = 0;
+	while (*temp != L'\0')
+	{
+		titleText[count] = *temp;
+		count++;
+		temp++;
+	}
 
 	return titleText;
+}
+
+bool TitleExisted(int32 id)
+{
+	if (ParseToUnicode(csvFile.Items[id][1]))
+	{
+		return false;
+	}
+
+	return true;
 }
 
 wchar_t* ReturnContentText(int32 id, int32 RowNum)
