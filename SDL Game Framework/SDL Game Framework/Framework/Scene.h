@@ -1,6 +1,5 @@
 #pragma once
 #include "Type.h"
-#include "Text.h"
 
 #define GUIDELINE_COUNT 10
 

@@ -15,6 +15,7 @@ void InitCsvParse(void)
 }
 
 // 첫번째 줄은 어떻게든 빼겠는데 두번째 줄이 안 빠진다
+// 당연함 Text는 한 줄만 받음
 wchar_t** ReturnContentText(int id)
 {
 	wchar_t str[10][1024] = {'0'};
@@ -42,21 +43,29 @@ wchar_t** ReturnContentText(int id)
 	return str;
 }
 
-int ReturnNextSceneNum(int id)
+int ReturnSelect1Index(int id)
 {
-	int nextSceneNum;
+	int Select1Index;
 
-	nextSceneNum = ParseToUnicode(csvFile.Items[id][5]);
+	Select1Index = ParseToUnicode(csvFile.Items[id][4]);
 
-	return nextSceneNum;
+	return Select1Index;
 }
 
-// 제대로 출력된다 Overture.mp3가 뭔가 이상한듯?
-char* ReturnMusicName(int id)
+char* ReturnBGMName(int id)
 {
-	char* musicName;
+	char* BGMName;
 
-	musicName = ParseToAscii(csvFile.Items[id][4]);
+	BGMName = ParseToAscii(csvFile.Items[id][7]);
 
-	return musicName;
+	return BGMName;
+}
+
+char* ReturnBackGroundImage(int id)
+{
+	char* BackGroundImageName;
+
+	BackGroundImageName = ParseToAscii(csvFile.Items[id][8]);
+
+	return BackGroundImageName;
 }
