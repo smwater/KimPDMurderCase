@@ -33,7 +33,7 @@ wchar_t* ReturnTitleText(int32 id)
 
 bool TitleExisted(int32 id)
 {
-	if (ParseToUnicode(csvFile.Items[id][1]))
+	if (NULL == ParseToUnicode(csvFile.Items[id][1]))
 	{
 		return false;
 	}
@@ -90,31 +90,36 @@ wchar_t* ReturnContentText(int32 id, int32 RowNum)
 	return finishedText;
 }
 
-wchar_t* ReturnSelect1(int32 id)
+wchar_t* ReturnSelect(int32 id, int32 selectNum)
 {
-	wchar_t* select1;
+	static wchar_t selectText[128] = { L"\0" };
 
-	select1 = ParseToUnicode(csvFile.Items[id][3]);
+	for (int32 i = 0; i < 128; i++)
+	{
+		selectText[i] = L'\0';
+	}
 
-	return select1;
+	wchar_t* temp = ParseToUnicode(csvFile.Items[id][3 + selectNum]);
+
+	int count = 0;
+	while (*temp != L'\0')
+	{
+		selectText[count] = *temp;
+		count++;
+		temp++;
+	}
+
+	return selectText;
 }
 
-wchar_t* ReturnSelect2(int32 id)
+bool SelectExisted(int32 id, int32 selectNum)
 {
-	wchar_t* select2;
+	if (NULL == ParseToUnicode(csvFile.Items[id][3 + selectNum]))
+	{
+		return false;
+	}
 
-	select2 = ParseToUnicode(csvFile.Items[id][4]);
-
-	return select2;
-}
-
-wchar_t* ReturnSelect3(int32 id)
-{
-	wchar_t* select3;
-
-	select3 = ParseToUnicode(csvFile.Items[id][5]);
-
-	return select3;
+	return true;
 }
 
 int32 ReturnSelect1Index(int32 id)
@@ -153,22 +158,25 @@ char* ReturnBGM(int32 id)
 	return BGM;
 }
 
-char* ReturnSoundEffect1(int32 id)
+char* ReturnSoundEffect(int32 id, int32 effectNum)
 {
-	char* SoundEffect1;
+	char* SoundEffect;
 
-	SoundEffect1 = ParseToAscii(csvFile.Items[id][10]);
+	SoundEffect = ParseToAscii(csvFile.Items[id][10 + effectNum]);
 
-	return SoundEffect1;
+	return SoundEffect;
 }
 
-char* ReturnSoundEffect2(int32 id)
+// 효과음의 예외처리가 안된다
+// 우째서 으아악
+bool SoundEffectExisted(int32 id, int32 effectNum)
 {
-	char* SoundEffect2;
+	if (NULL == ParseToUnicode(csvFile.Items[id][10 + effectNum]))
+	{
+		return false;
+	}
 
-	SoundEffect2 = ParseToAscii(csvFile.Items[id][11]);
-
-	return SoundEffect2;
+	return true;
 }
 
 char* ReturnBackGroundImage(int32 id)

@@ -1,7 +1,7 @@
 #pragma once
 #include "Type.h"
 
-#define GUIDELINE_COUNT 10
+#define GUIDELINE_COUNT 20
 
 typedef struct Scene
 {

@@ -85,13 +85,15 @@ typedef struct tagConetentSceneData {
 	Image BackGroundImage;
 	Image BackPaper;
 	Music BGM;
+	SoundEffect Effect[2];
 	Text TitleLine[1];
 	Text GuideLine[GUIDELINE_COUNT];
+	Text SelectLine[3];
 	int32 X;
 	int32 Y;
 } ContentSceneData;
 
-int32 id = 66;
+int32 id = 1;
 
 void init_content(void)
 {
@@ -104,7 +106,16 @@ void init_content(void)
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
 	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
-	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
+	Audio_Play(&data->BGM, INFINITY_LOOP);
+	
+	/*for (int32 i = 0; i < 2; i++)
+	{
+		if (SoundEffectExisted(id, i))
+		{
+			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(id, i));
+			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
+		}
+	}*/
 
 	if (TitleExisted(id))
 	{
@@ -118,6 +129,12 @@ void init_content(void)
 		Text_CreateText(&data->GuideLine[i], "GongGothicLight.ttf", 20, content, wcslen(content));
 	}
 
+	for (int32 i = 0; i < 3; i++)
+	{
+		if (SelectExisted(id, i)) {
+			Text_CreateText(&data->SelectLine[i], "GongGothicMedium.ttf", 30, ReturnSelect(id, i), wcslen(ReturnSelect(id, i)));
+		}
+	}
 }
 
 void update_content(void)
@@ -144,6 +161,13 @@ void render_content(void)
 		Renderer_DrawTextSolid(&data->GuideLine[i], 100, 150 + 40 * i, color);
 	}
 
+	for (int32 i = 0; i < 3; ++i) {
+		if (SelectExisted(id, i)) {
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
+		}
+	}
+
 }
 
 void release_content(void)
@@ -151,6 +175,15 @@ void release_content(void)
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
 	Audio_FreeMusic(&data->BGM);
+	/*for (int32 i = 0; i < 2; i++)
+	{
+		if (SoundEffectExisted(id, i))
+		{
+			Audio_FreeSoundEffect(&data->Effect[i]);
+		}
+	}*/
+	
+	SafeFree(g_Scene.Data);
 }
 #pragma endregion
 
