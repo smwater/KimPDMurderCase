@@ -16,31 +16,53 @@ void InitCsvParse(void)
 
 // 첫번째 줄은 어떻게든 빼겠는데 두번째 줄이 안 빠진다
 // 당연함 Text는 한 줄만 받음
-wchar_t** ReturnContentText(int id)
+wchar_t* ReturnContentText(int32 id, int32 RowNum)
 {
-	wchar_t str[10][1024] = {'0'};
-
-	wchar_t* text;
-	text = ParseToUnicode(csvFile.Items[id][2]);
-
-	for (int i = 0; *text != L'\0';)
+	static wchar_t finishedText[128] = { L"\0" };
+	
+	for (int32 i = 0; i < 128; i++)
 	{
-		for (int j = 0; j < 1024; j++)
+		finishedText[i] = L'\0';
+	}
+
+	wchar_t* nowCharacter;
+	nowCharacter = ParseToUnicode(csvFile.Items[id][2]);
+
+	int32 row = 0;
+
+	while (*nowCharacter != L'\0')
+	{
+		for (int32 lineText = 0; lineText < 128; lineText++)
 		{
-			if (*text == L'\n')
+			if (*nowCharacter == L'\0')
 			{
-				i++;
-				j = 0;
+				return finishedText;
 			}
-			else
+			else if (*nowCharacter == L'\n')
 			{
-				str[i][j] = *text;
+				row++;
+				lineText = -1;
 			}
-			text++;
+			else if (row == RowNum)
+			{
+				if (*nowCharacter == L'\"')
+				{
+					lineText--;
+				}
+				else
+				{
+					finishedText[lineText] = *nowCharacter;
+				}
+			}
+			if (row > RowNum)
+			{
+				return finishedText;
+			}
+			nowCharacter++;
 		}
 	}
 
-	return str;
+	return finishedText;
 }
 
 // ParseToUnicord : L"1"
