@@ -81,7 +81,7 @@ void release_title(void)
 
 #pragma region ContentScene
 typedef struct tagConetentSceneData {
-	int id;
+	int32 id;
 	Image BackGroundImage;
 	Image BackPaper;
 	Music BGM;
