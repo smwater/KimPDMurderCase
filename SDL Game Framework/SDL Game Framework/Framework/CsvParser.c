@@ -122,31 +122,13 @@ bool SelectExisted(int32 id, int32 selectNum)
 	return true;
 }
 
-int32 ReturnSelect1Index(int32 id)
+int32 ReturnSelectIndex(int32 id, int32 selectNum)
 {
-	int Select1Index;
+	int SelectIndex;
 
-	Select1Index = ParseToInt(csvFile.Items[id][6]);
+	SelectIndex = ParseToInt(csvFile.Items[id][6 + selectNum]);
 
-	return Select1Index;
-}
-
-int32 ReturnSelect2Index(int32 id)
-{
-	int Select2Index;
-
-	Select2Index = ParseToInt(csvFile.Items[id][7]);
-
-	return Select2Index;
-}
-
-int32 ReturnSelect3Index(int32 id)
-{
-	int Select3Index;
-
-	Select3Index = ParseToInt(csvFile.Items[id][8]);
-
-	return Select3Index;
+	return SelectIndex;
 }
 
 char* ReturnBGM(int32 id)

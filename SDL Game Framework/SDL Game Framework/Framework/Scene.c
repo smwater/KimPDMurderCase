@@ -29,6 +29,9 @@ void init_title(void)
 	Image_LoadImage(&data->GameStartImage, "GameStartImage.png");
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 
+	data->CursorPos.X = 0;
+	data->CursorPos.Y = 0;
+
 	Audio_LoadMusic(&data->BGM, "Background.mp3");
 	Audio_Play(&data->BGM, INFINITY_LOOP);
 }
@@ -53,7 +56,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_ENDING);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 }
 
@@ -84,6 +87,8 @@ typedef struct tagConetentSceneData {
 	int32 id;
 	Image BackGroundImage;
 	Image BackPaper;
+	Image CursorImage;
+	COORD CursorPos;
 	Music BGM;
 	SoundEffect Effect[2];
 	Text TitleLine[1];
@@ -104,6 +109,10 @@ void init_content(void)
 
 	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(id));
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
+	Image_LoadImage(&data->CursorImage, "CursorImage.png");
+
+	data->CursorPos.X = 0;
+	data->CursorPos.Y = 0;
 
 	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
 	Audio_Play(&data->BGM, INFINITY_LOOP);
@@ -137,17 +146,119 @@ void init_content(void)
 	}
 }
 
+#define SelectPosY 485
+#define SelectPosY_1 545
+#define SelectPosY_2 605 
+
 void update_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 	
+	if (SelectExisted(id, 2))
+	{
+		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_2)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_2)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+	}
+
+	if (SelectExisted(id, 1))
+	{
+		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+	}
+
+	if (SelectExisted(id, 0))
+	{
+		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y != 0)
+		{
+			data->CursorPos.X = 0;
+			data->CursorPos.Y = 0;
+		}
+	}
+
+	
 }
+
 void render_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
+
+	if (data->CursorPos.Y != 0) {
+		Renderer_DrawImage(&data->CursorImage, data->CursorPos.X, data->CursorPos.Y);
+	}
 
 	if (TitleExisted(id))
 	{
@@ -234,7 +345,7 @@ void init_ending(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 30, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
 	}
 
 	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
@@ -266,15 +377,15 @@ void render_ending(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		if (900 - upPixel > 100)
+		if (900 - upPixel > 50)
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 30 * i - upPixel, color);
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 40 * i - upPixel, color);
 		}
 		else
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 100 + 30 * i, color);
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 50 + 40 * i, color);
 		}
 	}
 
