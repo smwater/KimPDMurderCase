@@ -53,7 +53,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_CONTENT);
+		Scene_SetNextScene(SCENE_ENDING);
 	}
 }
 
@@ -80,24 +80,20 @@ void release_title(void)
 #pragma endregion
 
 #pragma region ContentScene
-
-typedef struct tagSelect {
-	wchar_t* selectContent;
-	int nextIndex;
-} Select;
-
 typedef struct tagConetentSceneData {
+	int32 id;
 	Image BackGroundImage;
 	Image BackPaper;
-	Text GuideLine[GUIDELINE_COUNT];
-	int id;
-	wchar_t* contentText;	// GuideLine.String에 집어넣어야 함
 	Music BGM;
+	SoundEffect Effect[2];
+	Text TitleLine[1];
+	Text TextLine[TEXTLINE_COUNT];
+	Text SelectLine[3];
 	int32 X;
 	int32 Y;
 } ContentSceneData;
 
-int32 id = 30;
+int32 id = 1;
 
 void init_content(void)
 {
@@ -109,19 +105,36 @@ void init_content(void)
 	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(id));
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
-	Audio_LoadMusic(&data->BGM, ReturnBGMName(id));
-	Audio_PlayFadeIn(&data->BGM, INFINITY_LOOP, 3000);
-
-	/*const wchar_t* myStr = ReturnContentText(id, 8);
-	Text_CreateText(&data->GuideLine[0], "GongGothicBold.ttf", 20, myStr, wcslen(myStr));*/
-
-	for (int32 i = 0; i < GUIDELINE_COUNT; i++)
+	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
+	Audio_Play(&data->BGM, INFINITY_LOOP);
+	
+	for (int32 i = 0; i < 2; i++)
 	{
-		wchar_t* myStr = ReturnContentText(id, i);
-
-		Text_CreateText(&data->GuideLine[i], "GongGothicLight.ttf", 20, myStr, wcslen(myStr));
+		if (SoundEffectExisted(id, i))
+		{
+			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(id, i));
+			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
+		}
 	}
 
+	if (TitleExisted(id))
+	{
+		wchar_t* title = ReturnTitleText(id);
+		Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, wcslen(title));
+	}
+
+	for (int32 i = 0; i < TEXTLINE_COUNT; i++)
+	{
+		wchar_t* content = ReturnContentText(id, i);
+		Text_CreateText(&data->TextLine[i], "GongGothicLight.ttf", 20, content, wcslen(content));
+	}
+
+	for (int32 i = 0; i < 3; i++)
+	{
+		if (SelectExisted(id, i)) {
+			Text_CreateText(&data->SelectLine[i], "GongGothicMedium.ttf", 30, ReturnSelect(id, i), wcslen(ReturnSelect(id, i)));
+		}
+	}
 }
 
 void update_content(void)
@@ -136,13 +149,23 @@ void render_content(void)
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
-	/*SDL_Color color = { .a = 255 };
-	Renderer_DrawTextSolid(&data->GuideLine[0], 50, 100, color);*/
-
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	if (TitleExisted(id))
 	{
 		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 50, 100 + 30 * i, color);
+		Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
+	}
+
+	for (int32 i = 0; i < TEXTLINE_COUNT; ++i)
+	{
+		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+		Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
+	}
+
+	for (int32 i = 0; i < 3; ++i) {
+		if (SelectExisted(id, i)) {
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
+		}
 	}
 
 }
@@ -152,6 +175,15 @@ void release_content(void)
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
 	Audio_FreeMusic(&data->BGM);
+	for (int32 i = 0; i < 2; i++)
+	{
+		if (SoundEffectExisted(id, i))
+		{
+			Audio_FreeSoundEffect(&data->Effect[i]);
+		}
+	}
+	
+	SafeFree(g_Scene.Data);
 }
 #pragma endregion
 
@@ -184,6 +216,7 @@ typedef struct EndingSceneData
 	float		Volume;
 	SoundEffect Effect;
 	Image		BackGround;
+	Image		BackPaper;
 	float		Speed;
 	int32		X;
 	int32		Y;
@@ -196,10 +229,12 @@ void init_ending(void)
 	memset(g_Scene.Data, 0, sizeof(EndingSceneData));
 
 	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
+	Image_LoadImage(&data->BackGround, "TitleImage.png");
+	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 20, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 30, str2[i], wcslen(str2[i]));
 	}
 
 	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
@@ -220,15 +255,27 @@ void update_ending(void)
 }
 
 int upPixel = 0;
+int count = 0;
 
 void render_ending(void)
 {
 	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
+	Renderer_DrawImage(&data->BackGround, 0, 0);
+	Renderer_DrawImage(&data->BackPaper, 0, 0);
+
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		SDL_Color color = { .a = 255 };
-		Renderer_DrawTextSolid(&data->GuideLine[i], 600, 900 + 30 * i - upPixel, color);
+		if (900 - upPixel > 100)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 30 * i - upPixel, color);
+		}
+		else
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 100 + 30 * i, color);
+		}
 	}
 
 	upPixel += 5;

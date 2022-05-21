@@ -14,8 +14,33 @@ void InitCsvParse(void)
 	CreateCsvFile(&csvFile, "test.csv");
 }
 
-// 첫번째 줄은 어떻게든 빼겠는데 두번째 줄이 안 빠진다
-// 당연함 Text는 한 줄만 받음
+wchar_t* ReturnTitleText(int32 id)
+{
+	static wchar_t titleText[128] = { L"\0" };
+	
+	wchar_t* temp = ParseToUnicode(csvFile.Items[id][1]);
+
+	int count = 0;
+	while (*temp != L'\0')
+	{
+		titleText[count] = *temp;
+		count++;
+		temp++;
+	}
+
+	return titleText;
+}
+
+bool TitleExisted(int32 id)
+{
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][1])))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 wchar_t* ReturnContentText(int32 id, int32 RowNum)
 {
 	static wchar_t finishedText[128] = { L"\0" };
@@ -65,41 +90,99 @@ wchar_t* ReturnContentText(int32 id, int32 RowNum)
 	return finishedText;
 }
 
-// ParseToUnicord : L"1"
-// ParseToAscii   :  "1"
-// ParseToInt     :   1
-int ReturnSelect1Index(int id)
+wchar_t* ReturnSelect(int32 id, int32 selectNum)
+{
+	static wchar_t selectText[128] = { L"\0" };
+
+	for (int32 i = 0; i < 128; i++)
+	{
+		selectText[i] = L'\0';
+	}
+
+	wchar_t* temp = ParseToUnicode(csvFile.Items[id][3 + selectNum]);
+
+	int count = 0;
+	while (*temp != L'\0')
+	{
+		selectText[count] = *temp;
+		count++;
+		temp++;
+	}
+
+	return selectText;
+}
+
+bool SelectExisted(int32 id, int32 selectNum)
+{
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][3 + selectNum])))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+int32 ReturnSelect1Index(int32 id)
 {
 	int Select1Index;
 
-	Select1Index = ParseToInt(csvFile.Items[id][4]);
+	Select1Index = ParseToInt(csvFile.Items[id][6]);
 
 	return Select1Index;
 }
 
-int ReturnSelect2Index(int id)
+int32 ReturnSelect2Index(int32 id)
 {
 	int Select2Index;
 
-	Select2Index = ParseToInt(csvFile.Items[id][5]);
+	Select2Index = ParseToInt(csvFile.Items[id][7]);
 
 	return Select2Index;
 }
 
-char* ReturnBGMName(int id)
+int32 ReturnSelect3Index(int32 id)
 {
-	char* BGMName;
+	int Select3Index;
 
-	BGMName = ParseToAscii(csvFile.Items[id][7]);
+	Select3Index = ParseToInt(csvFile.Items[id][8]);
 
-	return BGMName;
+	return Select3Index;
 }
 
-char* ReturnBackGroundImage(int id)
+char* ReturnBGM(int32 id)
+{
+	char* BGM;
+
+	BGM = ParseToAscii(csvFile.Items[id][9]);
+
+	return BGM;
+}
+
+char* ReturnSoundEffect(int32 id, int32 effectNum)
+{
+	char* SoundEffect;
+
+	SoundEffect = ParseToAscii(csvFile.Items[id][10 + effectNum]);
+
+	return SoundEffect;
+}
+
+// 갓중재께서 해결해주심
+bool SoundEffectExisted(int32 id, int32 effectNum)
+{
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][10 + effectNum])))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+char* ReturnBackGroundImage(int32 id)
 {
 	char* BackGroundImageName;
 
-	BackGroundImageName = ParseToAscii(csvFile.Items[id][8]);
+	BackGroundImageName = ParseToAscii(csvFile.Items[id][12]);
 
 	return BackGroundImageName;
 }
