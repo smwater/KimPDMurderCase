@@ -128,7 +128,7 @@ int32 ReturnSelectIndex(int32 id, int32 selectNum)
 
 	SelectIndex = ParseToInt(csvFile.Items[id][6 + selectNum]);
 
-	return SelectIndex;
+	return SelectIndex + 1;
 }
 
 char* ReturnBGM(int32 id)
