@@ -43,6 +43,7 @@ void update_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
+	// 커서 이동범위 제한 
 	if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.X == 0 && data->CursorPos.Y == 0)
 	{
 		data->CursorPos.X = GameStartPosX;
@@ -54,6 +55,7 @@ void update_title(void)
 		data->CursorPos.Y = 0;
 	}
 
+	// 커서 위치에 따라 다음 씬 출력
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
 		Scene_SetNextScene(SCENE_CONTENT);
@@ -65,7 +67,7 @@ void render_title(void)
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
 	Renderer_DrawImage(&data->TitleBackGroundImage, 0, 0);
-	Renderer_DrawImage(&data->GameStartImage, 559, 540);
+	Renderer_DrawImage(&data->GameStartImage, 559, 545);
 
 	if (data->CursorPos.X != 0 && data->CursorPos.Y != 0)
 	{
@@ -77,7 +79,6 @@ void release_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
-	Audio_FreeMusic(&data->BGM);
 	SafeFree(g_Scene.Data);
 }
 #pragma endregion
@@ -101,6 +102,7 @@ typedef struct tagConetentSceneData {
 // 다음씬의 id를 저장하는 변수
 // 처음에는 첫 장면을 출력하기 위해 1을 입력한다.
 int32 storedId = 1;
+char prevBGM = 'B';
 
 void init_content(void)
 {
@@ -118,8 +120,15 @@ void init_content(void)
 	data->CursorPos.X = 0;
 	data->CursorPos.Y = 0;
 
-	Audio_LoadMusic(&data->BGM, ReturnBGM(data->id));
-	Audio_Play(&data->BGM, INFINITY_LOOP);
+	// 이전 씬과 음악이 다르다면 다른 음악을 출력한다.
+	char* nowBGM = ReturnBGM(data->id);
+	if (*nowBGM != prevBGM)
+	{
+		Audio_LoadMusic(&data->BGM, nowBGM);
+		Audio_Play(&data->BGM, INFINITY_LOOP);
+		
+		prevBGM = *nowBGM;
+	}
 	
 	for (int32 i = 0; i < 2; i++)
 	{
@@ -154,11 +163,13 @@ void init_content(void)
 #define SelectPosY_1 545
 #define SelectPosY_2 605 
 
+#define LimitContentTextRow 10
+
 void update_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 	
-	// 선택지 갯수에 따른 이동범위 제한
+	// 선택지 갯수에 따른 커서 이동범위 제한
 	if (SelectExisted(data->id, 2))
 	{
 		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
@@ -235,6 +246,20 @@ void update_content(void)
 			data->CursorPos.Y = SelectPosY_1;
 		}
 	}
+	// 한 화면에 텍스트가 10줄 이상일 때 예외 처리
+	else if(ReturnContentTextRow(data->id) >= LimitContentTextRow)
+	{
+		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+		else if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y != 0)
+		{
+			data->CursorPos.X = 0;
+			data->CursorPos.Y = 0;
+		}
+	}
 	else
 	{
 		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
@@ -250,9 +275,15 @@ void update_content(void)
 	}
 
 	// 현재 씬이 컨텐츠씬에서 마지막 씬일 경우 엔딩을 출력
-	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY && data->id == 82)
+	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY && data->id == 83)
 	{
 		Scene_SetNextScene(SCENE_ENDING);
+	}
+	// 한 화면에 텍스트가 10줄 이상일 때 예외처리
+	else if (ReturnContentTextRow(data->id) >= LimitContentTextRow && Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY_2)
+	{
+		storedId = ReturnSelectIndex(data->id, 0);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 	// 커서가 어느 선택지를 가리키는지에 따라 다른 씬 출력
 	else if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY)
@@ -296,7 +327,13 @@ void render_content(void)
 	}
 
 	for (int32 i = 0; i < 3; ++i) {
-		if (SelectExisted(data->id, i)) {
+		// 한 화면에 텍스트가 10줄 이상일 때 예외 처리
+		if (SelectExisted(data->id, i) && ReturnContentTextRow(data->id) >= LimitContentTextRow)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 620 + 60 * i, color);
+		}
+		else if (SelectExisted(data->id, i)) {
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
 			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
 		}
@@ -308,13 +345,31 @@ void release_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
-	Audio_FreeMusic(&data->BGM);
+	// 이전 음악과 다를 때만 정리해준다
+	char* nowBGM = ReturnBGM(data->id);
+	if (*nowBGM != prevBGM)
+	{
+		Audio_FreeMusic(&data->BGM);
+	}
+	
 	for (int32 i = 0; i < 2; i++)
 	{
 		if (SoundEffectExisted(data->id, i))
 		{
 			Audio_FreeSoundEffect(&data->Effect[i]);
 		}
+	}
+
+	Text_FreeText(&data->TitleLine[0]);
+
+	for (int32 i = 0; i < TEXTLINE_COUNT; i++)
+	{
+		Text_FreeText(&data->TextLine[i]);
+	}
+
+	for (int32 i = 0; i < 3; i++)
+	{
+		Text_FreeText(&data->SelectLine[i]);
 	}
 	
 	SafeFree(g_Scene.Data);
@@ -345,10 +400,9 @@ const wchar_t* str2[] = {
 
 typedef struct EndingSceneData
 {
-	Text		GuideLine[GUIDELINE_COUNT];
+	Text		EndingLine[ENDINGLINE_COUNT];
 	Music		BGM;
 	float		Volume;
-	SoundEffect Effect;
 	Image		BackGround;
 	Image		BackPaper;
 	float		Speed;
@@ -366,9 +420,9 @@ void init_ending(void)
 	Image_LoadImage(&data->BackGround, "TitleImage.png");
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->EndingLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
 	}
 
 	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
@@ -388,8 +442,8 @@ void update_ending(void)
 
 }
 
+// 엔딩씬 위로 상승하는 효과를 위한 변수
 int upPixel = 0;
-int count = 0;
 
 void render_ending(void)
 {
@@ -398,17 +452,17 @@ void render_ending(void)
 	Renderer_DrawImage(&data->BackGround, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
 		if (900 - upPixel > 50)
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 40 * i - upPixel, color);
+			Renderer_DrawTextSolid(&data->EndingLine[i], 75, 900 + 40 * i - upPixel, color);
 		}
 		else
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 50 + 40 * i, color);
+			Renderer_DrawTextSolid(&data->EndingLine[i], 75, 50 + 40 * i, color);
 		}
 	}
 
@@ -419,12 +473,11 @@ void release_ending(void)
 {
 	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
-	for (int32 i = 0; i < 10; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
-		Text_FreeText(&data->GuideLine[i]);
+		Text_FreeText(&data->EndingLine[i]);
 	}
 	Audio_FreeMusic(&data->BGM);
-	Audio_FreeSoundEffect(&data->Effect);
 
 	SafeFree(g_Scene.Data);
 }

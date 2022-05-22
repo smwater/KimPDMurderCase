@@ -1,8 +1,8 @@
 ﻿  Scene.c
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(134,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(140,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(146,97): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(366,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(145,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(151,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(157,97): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(425,76): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   SDL Game Framework.vcxproj -> C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
   C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
   C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
