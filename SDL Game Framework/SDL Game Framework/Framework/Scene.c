@@ -65,7 +65,7 @@ void render_title(void)
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
 	Renderer_DrawImage(&data->TitleBackGroundImage, 0, 0);
-	Renderer_DrawImage(&data->GameStartImage, 559, 540);
+	Renderer_DrawImage(&data->GameStartImage, 559, 545);
 
 	if (data->CursorPos.X != 0 && data->CursorPos.Y != 0)
 	{
@@ -77,7 +77,6 @@ void release_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
-	Audio_FreeMusic(&data->BGM);
 	SafeFree(g_Scene.Data);
 }
 #pragma endregion
@@ -101,6 +100,7 @@ typedef struct tagConetentSceneData {
 // 다음씬의 id를 저장하는 변수
 // 처음에는 첫 장면을 출력하기 위해 1을 입력한다.
 int32 storedId = 1;
+char prevBGM[] = "Background.mp3";
 
 void init_content(void)
 {
@@ -118,8 +118,18 @@ void init_content(void)
 	data->CursorPos.X = 0;
 	data->CursorPos.Y = 0;
 
-	Audio_LoadMusic(&data->BGM, ReturnBGM(data->id));
-	Audio_Play(&data->BGM, INFINITY_LOOP);
+	char* nowBGM = ReturnBGM(data->id);
+	if (*nowBGM != prevBGM)
+	{
+		Audio_LoadMusic(&data->BGM, nowBGM);
+		Audio_Play(&data->BGM, INFINITY_LOOP);
+		
+		/*for (int i = 0; nowBGM != '\0'; i++)
+		{
+			prevBGM[i] = *nowBGM;
+			nowBGM++;
+		}*/
+	}
 	
 	for (int32 i = 0; i < 2; i++)
 	{
@@ -153,6 +163,8 @@ void init_content(void)
 #define SelectPosY 485
 #define SelectPosY_1 545
 #define SelectPosY_2 605 
+
+#define LimitContentTextRow 10
 
 void update_content(void)
 {
@@ -235,6 +247,20 @@ void update_content(void)
 			data->CursorPos.Y = SelectPosY_1;
 		}
 	}
+	// 한 화면에 텍스트가 10줄 이상일 때 예외 처리
+	else if(ReturnContentTextRow(data->id) >= LimitContentTextRow)
+	{
+		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+		else if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y != 0)
+		{
+			data->CursorPos.X = 0;
+			data->CursorPos.Y = 0;
+		}
+	}
 	else
 	{
 		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
@@ -250,9 +276,15 @@ void update_content(void)
 	}
 
 	// 현재 씬이 컨텐츠씬에서 마지막 씬일 경우 엔딩을 출력
-	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY && data->id == 82)
+	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY && data->id == 83)
 	{
 		Scene_SetNextScene(SCENE_ENDING);
+	}
+	// 한 화면에 텍스트가 10줄 이상일 때 예외처리
+	else if (ReturnContentTextRow(data->id) >= LimitContentTextRow && Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY_2)
+	{
+		storedId = ReturnSelectIndex(data->id, 0);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 	// 커서가 어느 선택지를 가리키는지에 따라 다른 씬 출력
 	else if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY)
@@ -296,7 +328,13 @@ void render_content(void)
 	}
 
 	for (int32 i = 0; i < 3; ++i) {
-		if (SelectExisted(data->id, i)) {
+		// 한 화면에 텍스트가 10줄 이상일 때 예외 처리
+		if (SelectExisted(data->id, i) && ReturnContentTextRow(data->id) >= LimitContentTextRow)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 620 + 60 * i, color);
+		}
+		else if (SelectExisted(data->id, i)) {
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
 			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
 		}

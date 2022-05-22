@@ -90,6 +90,25 @@ wchar_t* ReturnContentText(int32 id, int32 RowNum)
 	return finishedText;
 }
 
+int32 ReturnContentTextRow(int32 id)
+{
+	wchar_t* nowCharacter;
+	nowCharacter = ParseToUnicode(csvFile.Items[id][2]);
+
+	int32 row = 0;
+
+	while (*nowCharacter != L'\0')
+	{
+		if (*nowCharacter == L'\n')
+		{
+			row++;
+		}
+		nowCharacter++;
+	}
+
+	return row + 1;
+}
+
 wchar_t* ReturnSelect(int32 id, int32 selectNum)
 {
 	static wchar_t selectText[128] = { L"\0" };

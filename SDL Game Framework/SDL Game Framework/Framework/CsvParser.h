@@ -29,6 +29,13 @@ bool TitleExisted(int32 id);
 wchar_t* ReturnContentText(int32 id, int32 RowNum);
 
 /// <summary>
+/// 현재 씬의 내용 텍스트가 몇 줄인지 반환한다.
+/// </summary>
+/// <param name="id">현재 씬의 인덱스</param>
+/// <returns>내용 텍스트의 줄 수를 반환한다.</returns>
+int32 ReturnContentTextRow(int32 id);
+
+/// <summary>
 /// 현재 씬의 선택지의 내용을 반환한다.
 /// </summary>
 /// <param name="id">현재 씬의 인덱스</param>
