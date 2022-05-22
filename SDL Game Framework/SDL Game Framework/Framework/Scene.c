@@ -97,6 +97,21 @@ typedef struct tagConetentSceneData {
 	Text SelectLine[3];
 	int32 X;
 	int32 Y;
+
+	// 연출 효과 데이터
+	float timerTitle;
+	float timerContent;
+	float timerImage;
+
+	bool isTextTitleEffect;
+	bool isTextLineEffect;
+	bool isTextLineMaintain;
+	
+	int32 TextLineCount;
+	int32 TimerCount;
+
+	Uint8 Alpha;
+
 } ContentSceneData;
 
 // 다음씬의 id를 저장하는 변수
@@ -120,6 +135,20 @@ void init_content(void)
 	data->CursorPos.X = 0;
 	data->CursorPos.Y = 0;
 
+	// 연출 효과 초기화.
+	data->timerTitle = 0.0f;
+	data->timerContent = 1.0f;
+	data->timerImage = 0.0f;
+
+	data->isTextTitleEffect = true; 
+	data->isTextLineEffect = false; 
+	data->isTextLineMaintain = false;
+
+	data->TextLineCount = ReturnContentTextRow(data->id);
+	data->TimerCount = 0;
+
+	data->Alpha = 50;
+
 	// 이전 씬과 음악이 다르다면 다른 음악을 출력한다.
 	char* nowBGM = ReturnBGM(data->id);
 	if (*nowBGM != prevBGM)
@@ -139,11 +168,11 @@ void init_content(void)
 		}
 	}
 
-	if (TitleExisted(data->id))
-	{
-		wchar_t* title = ReturnTitleText(data->id);
-		Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, wcslen(title));
-	}
+	//if (TitleExisted(data->id))
+	//{
+	//	wchar_t* title = ReturnTitleText(data->id);
+	//	Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, wcslen(title));
+	//}
 
 	for (int32 i = 0; i < TEXTLINE_COUNT; i++)
 	{
@@ -314,17 +343,17 @@ void render_content(void)
 		Renderer_DrawImage(&data->CursorImage, data->CursorPos.X, data->CursorPos.Y);
 	}
 
-	if (TitleExisted(data->id))
-	{
-		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-		Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
-	}
+	//if (TitleExisted(data->id))
+	//{
+	//	SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+	//	Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
+	//}
 
-	for (int32 i = 0; i < TEXTLINE_COUNT; ++i)
-	{
-		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-		Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
-	}
+	//for (int32 i = 0; i < TEXTLINE_COUNT; ++i)
+	//{
+	//	SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+	//	Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
+	//}
 
 	for (int32 i = 0; i < 3; ++i) {
 		// 한 화면에 텍스트가 10줄 이상일 때 예외 처리
@@ -337,6 +366,84 @@ void render_content(void)
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
 			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
 		}
+	}
+
+	// 씬전환 백그라운드 이미지 Fade / IN
+
+	data->timerImage += Timer_GetDeltaTime() * 20;
+
+	data->Alpha = Clamp(0, data->Alpha + data->timerImage, 255);
+	Image_SetAlphaValue(&data->BackGroundImage, data->Alpha);
+
+	if (data->Alpha > 253)
+	{
+		data->timerImage = 0.0f;
+	}
+
+
+	// 한 글자씩 출력하는 효과
+
+	if (data->isTextTitleEffect)
+	{
+		data->timerTitle += Timer_GetDeltaTime();
+
+		if (data->timerTitle > 0.1f)
+		{
+			if (TitleExisted(data->id))
+			{
+				wchar_t* title = ReturnTitleText(data->id);
+				Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, data->TimerCount);
+
+				if ((int)data->timerTitle == wcslen(title))
+				{
+					data->isTextTitleEffect = false;
+					data->isTextLineEffect = true;
+				}
+
+				data->timerTitle = 0;
+			}
+			data->TimerCount++;
+		}
+	}
+
+	if (TitleExisted(data->id))
+	{
+		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+		Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
+	}
+
+
+	// 한줄씩 출력하는 효과
+
+	if (data->isTextLineEffect = true || !(TitleExisted(data->id)))
+	{
+		data->timerContent += Timer_GetDeltaTime();
+		for (int32 i = 0; i < (int)data->timerContent; ++i)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = data->timerContent * 256 };
+			Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
+		}
+
+		for (int32 i = 0; i < (int)data->timerContent - 1; ++i)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
+		}
+	}
+
+	if ((data->isTextLineMaintain))
+	{
+		for (int32 i = 0; i < TEXTLINE_COUNT; ++i)
+		{
+			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
+			Renderer_DrawTextSolid(&data->TextLine[i], 100, 150 + 40 * i, color);
+		}
+	}
+
+	if ((int)data->timerContent == data->TextLineCount)
+	{
+		data->isTextLineMaintain = true;
+		data->timerContent = 0;
 	}
 
 }
