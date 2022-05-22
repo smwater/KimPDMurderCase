@@ -29,6 +29,9 @@ void init_title(void)
 	Image_LoadImage(&data->GameStartImage, "GameStartImage.png");
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 
+	data->CursorPos.X = 0;
+	data->CursorPos.Y = 0;
+
 	Audio_LoadMusic(&data->BGM, "Background.mp3");
 	Audio_Play(&data->BGM, INFINITY_LOOP);
 }
@@ -53,7 +56,7 @@ void update_title(void)
 
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
-		Scene_SetNextScene(SCENE_ENDING);
+		Scene_SetNextScene(SCENE_CONTENT);
 	}
 }
 
@@ -84,6 +87,8 @@ typedef struct tagConetentSceneData {
 	int32 id;
 	Image BackGroundImage;
 	Image BackPaper;
+	Image CursorImage;
+	COORD CursorPos;
 	Music BGM;
 	SoundEffect Effect[2];
 	Text TitleLine[1];
@@ -93,7 +98,9 @@ typedef struct tagConetentSceneData {
 	int32 Y;
 } ContentSceneData;
 
-int32 id = 1;
+// 다음씬의 id를 저장하는 변수
+// 처음에는 첫 장면을 출력하기 위해 1을 입력한다.
+int32 storedId = 1;
 
 void init_content(void)
 {
@@ -102,46 +109,169 @@ void init_content(void)
 
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
-	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(id));
-	Image_LoadImage(&data->BackPaper, "BackPaper.png");
+	data->id = storedId;
 
-	Audio_LoadMusic(&data->BGM, ReturnBGM(id));
+	Image_LoadImage(&data->BackGroundImage, ReturnBackGroundImage(data->id));
+	Image_LoadImage(&data->BackPaper, "BackPaper.png");
+	Image_LoadImage(&data->CursorImage, "CursorImage.png");
+
+	data->CursorPos.X = 0;
+	data->CursorPos.Y = 0;
+
+	Audio_LoadMusic(&data->BGM, ReturnBGM(data->id));
 	Audio_Play(&data->BGM, INFINITY_LOOP);
 	
 	for (int32 i = 0; i < 2; i++)
 	{
-		if (SoundEffectExisted(id, i))
+		if (SoundEffectExisted(data->id, i))
 		{
-			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(id, i));
+			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(data->id, i));
 			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
 		}
 	}
 
-	if (TitleExisted(id))
+	if (TitleExisted(data->id))
 	{
-		wchar_t* title = ReturnTitleText(id);
+		wchar_t* title = ReturnTitleText(data->id);
 		Text_CreateText(&data->TitleLine[0], "GongGothicMedium.ttf", 40, title, wcslen(title));
 	}
 
 	for (int32 i = 0; i < TEXTLINE_COUNT; i++)
 	{
-		wchar_t* content = ReturnContentText(id, i);
+		wchar_t* content = ReturnContentText(data->id, i);
 		Text_CreateText(&data->TextLine[i], "GongGothicLight.ttf", 20, content, wcslen(content));
 	}
 
 	for (int32 i = 0; i < 3; i++)
 	{
-		if (SelectExisted(id, i)) {
-			Text_CreateText(&data->SelectLine[i], "GongGothicMedium.ttf", 30, ReturnSelect(id, i), wcslen(ReturnSelect(id, i)));
+		if (SelectExisted(data->id, i)) {
+			Text_CreateText(&data->SelectLine[i], "GongGothicMedium.ttf", 30, ReturnSelect(data->id, i), wcslen(ReturnSelect(data->id, i)));
 		}
 	}
 }
+
+#define SelectPosY 485
+#define SelectPosY_1 545
+#define SelectPosY_2 605 
 
 void update_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 	
+	// 선택지 갯수에 따른 이동범위 제한
+	if (SelectExisted(data->id, 2))
+	{
+		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_2)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_2)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_2;
+		}
+	}
+	else if (SelectExisted(data->id, 1))
+	{
+		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+		else if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY_1)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == SelectPosY)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = 0;
+		}
+		else if (Input_GetKeyDown(VK_UP) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY_1;
+		}
+	}
+	else
+	{
+		if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y == 0)
+		{
+			data->CursorPos.X = 30;
+			data->CursorPos.Y = SelectPosY;
+		}
+		else if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.Y != 0)
+		{
+			data->CursorPos.X = 0;
+			data->CursorPos.Y = 0;
+		}
+	}
+
+	// 현재 씬이 컨텐츠씬에서 마지막 씬일 경우 엔딩을 출력
+	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY && data->id == 82)
+	{
+		Scene_SetNextScene(SCENE_ENDING);
+	}
+	// 커서가 어느 선택지를 가리키는지에 따라 다른 씬 출력
+	else if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY)
+	{
+		storedId = ReturnSelectIndex(data->id, 0);
+		Scene_SetNextScene(SCENE_CONTENT);
+	}
+	else if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY_1)
+	{
+		storedId = ReturnSelectIndex(data->id, 1);
+		Scene_SetNextScene(SCENE_CONTENT);
+	}
+	else if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.Y == SelectPosY_2)
+	{
+		storedId = ReturnSelectIndex(data->id, 2);
+		Scene_SetNextScene(SCENE_CONTENT);
+	}
 }
+
 void render_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
@@ -149,7 +279,11 @@ void render_content(void)
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
-	if (TitleExisted(id))
+	if (data->CursorPos.Y != 0) {
+		Renderer_DrawImage(&data->CursorImage, data->CursorPos.X, data->CursorPos.Y);
+	}
+
+	if (TitleExisted(data->id))
 	{
 		SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
 		Renderer_DrawTextSolid(&data->TitleLine[0], 100, 30, color);
@@ -162,7 +296,7 @@ void render_content(void)
 	}
 
 	for (int32 i = 0; i < 3; ++i) {
-		if (SelectExisted(id, i)) {
+		if (SelectExisted(data->id, i)) {
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
 			Renderer_DrawTextSolid(&data->SelectLine[i], 70, 500 + 60 * i, color);
 		}
@@ -177,7 +311,7 @@ void release_content(void)
 	Audio_FreeMusic(&data->BGM);
 	for (int32 i = 0; i < 2; i++)
 	{
-		if (SoundEffectExisted(id, i))
+		if (SoundEffectExisted(data->id, i))
 		{
 			Audio_FreeSoundEffect(&data->Effect[i]);
 		}
@@ -234,7 +368,7 @@ void init_ending(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 30, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
 	}
 
 	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
@@ -266,15 +400,15 @@ void render_ending(void)
 
 	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
 	{
-		if (900 - upPixel > 100)
+		if (900 - upPixel > 50)
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 30 * i - upPixel, color);
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 40 * i - upPixel, color);
 		}
 		else
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 100 + 30 * i, color);
+			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 50 + 40 * i, color);
 		}
 	}
 

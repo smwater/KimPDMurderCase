@@ -45,25 +45,12 @@ wchar_t* ReturnSelect(int32 id, int32 selectNum);
 bool SelectExisted(int32 id, int32 selectNum);
 
 /// <summary>
-/// 선택지1로 넘어가는 화면의 인덱스를 반환한다.
+/// 선택지로 넘어가는 화면의 인덱스를 반환한다.
 /// </summary>
 /// <param name="id">현재 씬의 인덱스</param>
-/// <returns>선택지1로 넘어가는 화면의 인덱스를 반환한다.</returns>
-int32 ReturnSelect1Index(int32 id);
-
-/// <summary>
-/// 선택지2로 넘어가는 화면의 인덱스를 반환한다.
-/// </summary>
-/// <param name="id">현재 씬의 인덱스</param>
-/// <returns>선택지2로 넘어가는 화면의 인덱스를 반환한다.</returns>
-int32 ReturnSelect2Index(int32 id);
-
-/// <summary>
-/// 선택지3으로 넘어가는 화면의 인덱스를 반환한다.
-/// </summary>
-/// <param name="id">현재 씬의 인덱스</param>
-/// <returns>선택지3으로 넘어가는 화면의 인덱스를 반환한다.</returns>
-int32 ReturnSelect3Index(int32 id);
+/// <param name="selectNum">선택지의 번호</param>
+/// <returns>선택지로 넘어가는 화면의 인덱스를 반환한다.</returns>
+int32 ReturnSelectIndex(int32 id, int32 selectNum);
 
 /// <summary>
 /// 현재 씬의 음악 이름을 반환한다.
