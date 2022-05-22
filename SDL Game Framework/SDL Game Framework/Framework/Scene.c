@@ -100,7 +100,7 @@ typedef struct tagConetentSceneData {
 // 다음씬의 id를 저장하는 변수
 // 처음에는 첫 장면을 출력하기 위해 1을 입력한다.
 int32 storedId = 1;
-char prevBGM[] = "Background.mp3";
+char prevBGM = 'B';
 
 void init_content(void)
 {
@@ -118,17 +118,15 @@ void init_content(void)
 	data->CursorPos.X = 0;
 	data->CursorPos.Y = 0;
 
+	// 이전 씬과 음악이 다르다면 다른 음악을 출력한다.
+	// 기록 위반으로 안되는 중
 	char* nowBGM = ReturnBGM(data->id);
 	if (*nowBGM != prevBGM)
 	{
 		Audio_LoadMusic(&data->BGM, nowBGM);
 		Audio_Play(&data->BGM, INFINITY_LOOP);
 		
-		/*for (int i = 0; nowBGM != '\0'; i++)
-		{
-			prevBGM[i] = *nowBGM;
-			nowBGM++;
-		}*/
+		prevBGM = *nowBGM;
 	}
 	
 	for (int32 i = 0; i < 2; i++)
@@ -346,7 +344,13 @@ void release_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 
-	Audio_FreeMusic(&data->BGM);
+	// 이전 음악과 다를 때만 정리해준다
+	char* nowBGM = ReturnBGM(data->id);
+	if (*nowBGM != prevBGM)
+	{
+		Audio_FreeMusic(&data->BGM);
+	}
+	
 	for (int32 i = 0; i < 2; i++)
 	{
 		if (SoundEffectExisted(data->id, i))
