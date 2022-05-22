@@ -359,6 +359,18 @@ void release_content(void)
 			Audio_FreeSoundEffect(&data->Effect[i]);
 		}
 	}
+
+	Text_FreeText(&data->TitleLine[0]);
+
+	for (int32 i = 0; i < TEXTLINE_COUNT; i++)
+	{
+		Text_FreeText(&data->TextLine[i]);
+	}
+
+	for (int32 i = 0; i < 3; i++)
+	{
+		Text_FreeText(&data->SelectLine[i]);
+	}
 	
 	SafeFree(g_Scene.Data);
 }
@@ -388,10 +400,9 @@ const wchar_t* str2[] = {
 
 typedef struct EndingSceneData
 {
-	Text		GuideLine[ENDINGLINE_COUNT];
+	Text		EndingLine[ENDINGLINE_COUNT];
 	Music		BGM;
 	float		Volume;
-	SoundEffect Effect;
 	Image		BackGround;
 	Image		BackPaper;
 	float		Speed;
@@ -411,7 +422,7 @@ void init_ending(void)
 
 	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
-		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
+		Text_CreateText(&data->EndingLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
 	}
 
 	Audio_LoadMusic(&data->BGM, "Denouement.mp3");
@@ -446,12 +457,12 @@ void render_ending(void)
 		if (900 - upPixel > 50)
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 900 + 40 * i - upPixel, color);
+			Renderer_DrawTextSolid(&data->EndingLine[i], 75, 900 + 40 * i - upPixel, color);
 		}
 		else
 		{
 			SDL_Color color = { .r = 255, .g = 255, .b = 255, .a = 255 };
-			Renderer_DrawTextSolid(&data->GuideLine[i], 75, 50 + 40 * i, color);
+			Renderer_DrawTextSolid(&data->EndingLine[i], 75, 50 + 40 * i, color);
 		}
 	}
 
@@ -464,10 +475,9 @@ void release_ending(void)
 
 	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
-		Text_FreeText(&data->GuideLine[i]);
+		Text_FreeText(&data->EndingLine[i]);
 	}
 	Audio_FreeMusic(&data->BGM);
-	Audio_FreeSoundEffect(&data->Effect);
 
 	SafeFree(g_Scene.Data);
 }
