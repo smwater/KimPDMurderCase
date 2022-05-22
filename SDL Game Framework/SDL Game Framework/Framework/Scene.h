@@ -2,7 +2,7 @@
 #include "Type.h"
 
 #define TEXTLINE_COUNT 20
-#define GUIDELINE_COUNT 18
+#define ENDINGLINE_COUNT 18
 
 typedef struct Scene
 {

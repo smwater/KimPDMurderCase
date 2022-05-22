@@ -1,8 +1,13 @@
-﻿  Scene.c
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(144,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(150,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(156,97): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(412,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  CsvParser.c
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\CsvParser.c(44,53): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\CsvParser.c(152,65): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\CsvParser.c(190,66): warning C4047: '==': 'void *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  Scene.c
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(145,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(151,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(157,97): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(414,75): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   SDL Game Framework.vcxproj -> C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
   C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
   C:\Users\User\Desktop\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll

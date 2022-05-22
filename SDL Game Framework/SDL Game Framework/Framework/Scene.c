@@ -43,6 +43,7 @@ void update_title(void)
 {
 	TitleSceneData* data = (TitleSceneData*)g_Scene.Data;
 
+	// 커서 이동범위 제한 
 	if ((Input_GetKeyDown(VK_UP) || Input_GetKeyDown(VK_DOWN)) && data->CursorPos.X == 0 && data->CursorPos.Y == 0)
 	{
 		data->CursorPos.X = GameStartPosX;
@@ -54,6 +55,7 @@ void update_title(void)
 		data->CursorPos.Y = 0;
 	}
 
+	// 커서 위치에 따라 다음 씬 출력
 	if (Input_GetKeyDown(VK_SPACE) && data->CursorPos.X == GameStartPosX && data->CursorPos.Y == GameStartPosY)
 	{
 		Scene_SetNextScene(SCENE_CONTENT);
@@ -119,7 +121,6 @@ void init_content(void)
 	data->CursorPos.Y = 0;
 
 	// 이전 씬과 음악이 다르다면 다른 음악을 출력한다.
-	// 기록 위반으로 안되는 중
 	char* nowBGM = ReturnBGM(data->id);
 	if (*nowBGM != prevBGM)
 	{
@@ -168,7 +169,7 @@ void update_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
 	
-	// 선택지 갯수에 따른 이동범위 제한
+	// 선택지 갯수에 따른 커서 이동범위 제한
 	if (SelectExisted(data->id, 2))
 	{
 		if (Input_GetKeyDown(VK_DOWN) && data->CursorPos.Y == 0)
@@ -387,7 +388,7 @@ const wchar_t* str2[] = {
 
 typedef struct EndingSceneData
 {
-	Text		GuideLine[GUIDELINE_COUNT];
+	Text		GuideLine[ENDINGLINE_COUNT];
 	Music		BGM;
 	float		Volume;
 	SoundEffect Effect;
@@ -408,7 +409,7 @@ void init_ending(void)
 	Image_LoadImage(&data->BackGround, "TitleImage.png");
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
 		Text_CreateText(&data->GuideLine[i], "GongGothicBold.ttf", 40, str2[i], wcslen(str2[i]));
 	}
@@ -430,8 +431,8 @@ void update_ending(void)
 
 }
 
+// 엔딩씬 위로 상승하는 효과를 위한 변수
 int upPixel = 0;
-int count = 0;
 
 void render_ending(void)
 {
@@ -440,7 +441,7 @@ void render_ending(void)
 	Renderer_DrawImage(&data->BackGround, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
-	for (int32 i = 0; i < GUIDELINE_COUNT; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
 		if (900 - upPixel > 50)
 		{
@@ -461,7 +462,7 @@ void release_ending(void)
 {
 	EndingSceneData* data = (EndingSceneData*)g_Scene.Data;
 
-	for (int32 i = 0; i < 10; ++i)
+	for (int32 i = 0; i < ENDINGLINE_COUNT; ++i)
 	{
 		Text_FreeText(&data->GuideLine[i]);
 	}
