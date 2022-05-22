@@ -184,6 +184,7 @@ char* ReturnSoundEffect(int32 id, int32 effectNum)
 	return SoundEffect;
 }
 
+
 // 갓중재께서 해결해주심
 bool SoundEffectExisted(int32 id, int32 effectNum)
 {
@@ -202,4 +203,43 @@ char* ReturnBackGroundImage(int32 id)
 	BackGroundImageName = ParseToAscii(csvFile.Items[id][12]);
 
 	return BackGroundImageName;
+}
+
+
+char* ReturnPortraitImg(int32 id)
+{
+	char* portraitImg;
+
+	portraitImg = ParseToAscii(csvFile.Items[id][13]);
+
+	return portraitImg;
+}
+
+char* ReturnEvidenceImg(int32 id)
+{
+	char* evidenceImg;
+
+	evidenceImg = ParseToAscii(csvFile.Items[id][14]);
+
+	return evidenceImg;
+}
+
+bool portraitImageExisted(int32 id)
+{
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][13])))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool EvidenceImgeExisted(int32 id)
+{
+	if (NULL == *(ParseToUnicode(csvFile.Items[id][14])))
+	{
+		return false;
+	}
+
+	return true;
 }
