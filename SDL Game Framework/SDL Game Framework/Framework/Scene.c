@@ -98,14 +98,25 @@ typedef struct tagConetentSceneData {
 	int32 X;
 	int32 Y;
 
+	// 등장인물 사진, 증거물 사진
+	Image PortraitImage;
+	Image EvidenceImage;
+
 	// 연출 효과 데이터
 	float timerTitle;
 	float timerContent;
 	float timerImage;
 
+	float timerPortraitImage;
+	float timerEvidenceImage;
+
 	bool isTextTitleEffect;
 	bool isTextLineEffect;
 	bool isTextLineMaintain;
+
+	bool isPortraitImageFix;
+	bool isEvidenceImageFix;
+
 	
 	int32 TextLineCount;
 	int32 TimerCount;
@@ -132,6 +143,11 @@ void init_content(void)
 	Image_LoadImage(&data->BackPaper, "BackPaper.png");
 	Image_LoadImage(&data->CursorImage, "CursorImage.png");
 
+
+	Image_LoadImage(&data->PortraitImage, ReturnPortraitImg(data->id)); // 등장인물 사진 가져오기
+	Image_LoadImage(&data->EvidenceImage, ReturnEvidenceImg(data->id)); // 증거물 사진 가져오기
+
+
 	data->CursorPos.X = 0;
 	data->CursorPos.Y = 0;
 
@@ -140,9 +156,16 @@ void init_content(void)
 	data->timerContent = 1.0f;
 	data->timerImage = 0.0f;
 
+	data->timerPortraitImage = 0.0f;
+	data->timerEvidenceImage = 0.0f;
+
 	data->isTextTitleEffect = true; 
 	data->isTextLineEffect = false; 
 	data->isTextLineMaintain = false;
+
+	data->isPortraitImageFix = false;
+	data->isEvidenceImageFix = false;
+
 
 	data->TextLineCount = ReturnContentTextRow(data->id);
 	data->TimerCount = 0;
@@ -159,14 +182,14 @@ void init_content(void)
 		prevBGM = *nowBGM;
 	}
 	
-	for (int32 i = 0; i < 2; i++)
-	{
-		if (SoundEffectExisted(data->id, i))
-		{
-			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(data->id, i));
-			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
-		}
-	}
+	//for (int32 i = 0; i < 2; i++)
+	//{
+	//	if (SoundEffectExisted(data->id, i))
+	//	{
+	//		Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(data->id, i));
+	//		Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
+	//	}
+	//}
 
 	//if (TitleExisted(data->id))
 	//{
@@ -192,7 +215,7 @@ void init_content(void)
 #define SelectPosY_1 545
 #define SelectPosY_2 605 
 
-#define LimitContentTextRow 10
+#define LimitContentTextRow 9
 
 void update_content(void)
 {
@@ -339,6 +362,45 @@ void render_content(void)
 	Renderer_DrawImage(&data->BackGroundImage, 0, 0);
 	Renderer_DrawImage(&data->BackPaper, 0, 0);
 
+	// 인물 사진 효과
+
+	if (!(data->isPortraitImageFix))
+	{
+		data->timerPortraitImage += Timer_GetDeltaTime() * 1000;
+		Renderer_DrawImage(&data->PortraitImage, 1000, 900 - data->timerPortraitImage);
+
+		if (data->timerPortraitImage >= 840)
+		{
+			data->isPortraitImageFix = true;
+		}
+	}
+
+	if (data->isPortraitImageFix)
+	{
+		Renderer_DrawImage(&data->PortraitImage, 1000, 900 - data->timerPortraitImage);
+	}
+	
+
+	//// 증거물 사진 효과
+
+	if (!(data->isEvidenceImageFix))
+	{
+		data->timerEvidenceImage += Timer_GetDeltaTime() * 1000;
+		Renderer_DrawImage(&data->EvidenceImage, 850, 800 - data->timerEvidenceImage);
+
+		if (data->timerEvidenceImage >= 500)
+		{
+			data->isEvidenceImageFix = true;
+		}
+	}
+
+	if (data->isEvidenceImageFix)
+	{
+		Renderer_DrawImage(&data->EvidenceImage, 850, 800 - data->timerEvidenceImage);
+	}
+
+
+
 	if (data->CursorPos.Y != 0) {
 		Renderer_DrawImage(&data->CursorImage, data->CursorPos.X, data->CursorPos.Y);
 	}
@@ -448,6 +510,7 @@ void render_content(void)
 
 }
 
+
 void release_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
@@ -459,13 +522,13 @@ void release_content(void)
 		Audio_FreeMusic(&data->BGM);
 	}
 	
-	for (int32 i = 0; i < 2; i++)
-	{
-		if (SoundEffectExisted(data->id, i))
-		{
-			Audio_FreeSoundEffect(&data->Effect[i]);
-		}
-	}
+	//for (int32 i = 0; i < 2; i++)
+	//{
+	//	if (SoundEffectExisted(data->id, i))
+	//	{
+	//		Audio_FreeSoundEffect(&data->Effect[i]);
+	//	}
+	//}
 
 	Text_FreeText(&data->TitleLine[0]);
 

@@ -1,58 +1,90 @@
 ﻿  Scene.c
-D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Framework\Scene.c(180,81): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Framework\Scene.c(186,103): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Framework\Scene.c(375,16): warning C4244: '=': 'float'에서 'Uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Framework\Scene.c(423,78): warning C4244: '초기화 중': 'float'에서 'Uint8'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Framework\Scene.c(532,82): warning C4267: '함수': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SDL Game Framework.vcxproj -> D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\x64\Debug\SDL Game Framework.exe
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libmodplug-1.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libmpg123-0.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libogg-0.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libopus-0.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libopusfile-0.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libpng16-16.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libtiff-5.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libvorbis-0.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libvorbisfile-3.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\libwebp-7.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\SDL2.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\SDL2_image.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\SDL2_mixer.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\SDL2_ttf.dll
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\External\Lib\SDL2\zlib1.dll
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(203,81): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(209,103): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(370,54): warning C4244: 'function': conversion from 'float' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(380,54): warning C4244: 'function': conversion from 'float' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(389,53): warning C4244: 'function': conversion from 'float' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(399,53): warning C4244: 'function': conversion from 'float' to 'int32', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(437,16): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(485,78): warning C4244: 'initializing': conversion from 'float' to 'Uint8', possible loss of data
+D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Framework\Scene.c(595,82): warning C4267: 'function': conversion from 'size_t' to 'int32', possible loss of data
+  SDL Game Framework.vcxproj -> D:\teamProject\KimPDMurderCase\SDL Game Framework\x64\Debug\SDL Game Framework.exe
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libFLAC-8.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libjpeg-9.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmodplug-1.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libmpg123-0.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libogg-0.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopus-0.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libopusfile-0.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libpng16-16.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libtiff-5.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbis-0.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libvorbisfile-3.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\libwebp-7.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_image.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_mixer.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\SDL2_ttf.dll
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\External\Lib\SDL2\zlib1.dll
          17개 파일이 복사되었습니다.
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Data\test.csv
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicBold.ttf
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicLight.ttf
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicMedium.ttf
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\BackPaper.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\CursorImage.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\Filming Site.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\GameStartImage.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\HaRapper_lodgment.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor_Office.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag_Room.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_House.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_Office.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\Meeting Room.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger_House.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\TitleImage.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\WallPaper.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC_Office.png
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Background.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\blip.wav
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Denouement.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Ending.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Inquiry.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Inquiry_Allegro.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Interrogate.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Interrogate_Variation.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Logic&Trick.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Objection.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Overture.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Reversal.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Truth.mp3
-  D:\teamproject\KimPDMurderCase[main]\SDL Game Framework\SDL Game Framework\Asset\Sound\Typing.wav
-  32개 파일이 복사되었습니다.
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Data\test.csv
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicBold.ttf
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicLight.ttf
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Font\GongGothicMedium.ttf
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\BackPaper.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Coffee Cup.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Corpse.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\CursorImage.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Filming Site.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\GameStartImage.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Harapper Album.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Harapper Hospital.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\HaRapper.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\HaRapper_lodgment.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor Hypnotic.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor Pamphlet.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungActor_Office.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag Diary.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag ProductionSpace Tool.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\JungGag_Room.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KIMPD Phone.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KIMPD.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_House Letter Bundle.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_House.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\KimPD_Office.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Letter Knife1.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Meeting Room.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Memorandum.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger Bankbook.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger Interview.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\ParkSinger_House.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Pure Nicotine2.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Sanatorium Hospitalization Details.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Sanatorium Phone Number.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\School Violence.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\TitleImage.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\University Reunion Fountain Pen.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\WallPaper.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\Yuhan Challenge Script.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC JabJi.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC Passport&Plane Ticket.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Image\YuMC_Office.png
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Background.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\blip.wav
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Denouement.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Ending.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Inquiry.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Inquiry_Allegro.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Interrogate.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Interrogate_Variation.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Logic&Trick.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Objection.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Overture.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Reversal.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Truth.mp3
+  D:\teamProject\KimPDMurderCase\SDL Game Framework\SDL Game Framework\Asset\Sound\Typing.wav
+  60개 파일이 복사되었습니다.

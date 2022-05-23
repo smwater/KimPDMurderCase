@@ -88,3 +88,11 @@ bool SoundEffectExisted(int32 id, int32 effectNum);
 /// <param name="id">현재 씬의 인덱스</param>
 /// <returns>현재 씬의 배경 이미지 이름을 반환한다.</returns>
 char* ReturnBackGroundImage(int32 id);
+
+char* ReturnPortraitImg(int32 id);
+
+char* ReturnEvidenceImg(int32 id);
+
+bool portraitImageExisted(int32 id);
+
+bool EvidenceImgeExisted(int32 id);
