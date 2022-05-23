@@ -182,14 +182,14 @@ void init_content(void)
 		prevBGM = *nowBGM;
 	}
 	
-	for (int32 i = 0; i < 2; i++)
-	{
-		if (SoundEffectExisted(data->id, i))
-		{
-			Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(data->id, i));
-			Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
-		}
-	}
+	//for (int32 i = 0; i < 2; i++)
+	//{
+	//	if (SoundEffectExisted(data->id, i))
+	//	{
+	//		Audio_LoadSoundEffect(&data->Effect[i], ReturnSoundEffect(data->id, i));
+	//		Audio_PlaySoundEffect(&data->Effect[i], INFINITY_LOOP);
+	//	}
+	//}
 
 	//if (TitleExisted(data->id))
 	//{
@@ -215,7 +215,7 @@ void init_content(void)
 #define SelectPosY_1 545
 #define SelectPosY_2 605 
 
-#define LimitContentTextRow 10
+#define LimitContentTextRow 9
 
 void update_content(void)
 {
@@ -367,9 +367,9 @@ void render_content(void)
 	if (!(data->isPortraitImageFix))
 	{
 		data->timerPortraitImage += Timer_GetDeltaTime() * 1000;
-		Renderer_DrawImage(&data->EvidenceImage, 600, 600 - data->timerPortraitImage);
+		Renderer_DrawImage(&data->PortraitImage, 1000, 900 - data->timerPortraitImage);
 
-		if (data->timerPortraitImage >= 500)
+		if (data->timerPortraitImage >= 840)
 		{
 			data->isPortraitImageFix = true;
 		}
@@ -377,7 +377,7 @@ void render_content(void)
 
 	if (data->isPortraitImageFix)
 	{
-		Renderer_DrawImage(&data->EvidenceImage, 600, 600 - data->timerPortraitImage);
+		Renderer_DrawImage(&data->PortraitImage, 1000, 900 - data->timerPortraitImage);
 	}
 	
 
@@ -386,7 +386,7 @@ void render_content(void)
 	if (!(data->isEvidenceImageFix))
 	{
 		data->timerEvidenceImage += Timer_GetDeltaTime() * 1000;
-		Renderer_DrawImage(&data->EvidenceImage, 600, 600 - data->timerEvidenceImage);
+		Renderer_DrawImage(&data->EvidenceImage, 850, 800 - data->timerEvidenceImage);
 
 		if (data->timerEvidenceImage >= 500)
 		{
@@ -396,7 +396,7 @@ void render_content(void)
 
 	if (data->isEvidenceImageFix)
 	{
-		Renderer_DrawImage(&data->EvidenceImage, 600, 600 - data->timerEvidenceImage);
+		Renderer_DrawImage(&data->EvidenceImage, 850, 800 - data->timerEvidenceImage);
 	}
 
 
@@ -511,9 +511,6 @@ void render_content(void)
 }
 
 
-
-
-
 void release_content(void)
 {
 	ContentSceneData* data = (ContentSceneData*)g_Scene.Data;
@@ -525,13 +522,13 @@ void release_content(void)
 		Audio_FreeMusic(&data->BGM);
 	}
 	
-	for (int32 i = 0; i < 2; i++)
-	{
-		if (SoundEffectExisted(data->id, i))
-		{
-			Audio_FreeSoundEffect(&data->Effect[i]);
-		}
-	}
+	//for (int32 i = 0; i < 2; i++)
+	//{
+	//	if (SoundEffectExisted(data->id, i))
+	//	{
+	//		Audio_FreeSoundEffect(&data->Effect[i]);
+	//	}
+	//}
 
 	Text_FreeText(&data->TitleLine[0]);
 

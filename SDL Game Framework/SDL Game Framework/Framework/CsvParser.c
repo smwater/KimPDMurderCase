@@ -11,7 +11,7 @@ void InitCsvParse(void)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	memset(&csvFile, 0, sizeof(CsvFile));
-	CreateCsvFile(&csvFile, "test.csv");
+	CreateCsvFile(&csvFile, "DB.csv");
 }
 
 wchar_t* ReturnTitleText(int32 id)
